@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./PDF.css";
 import Head from "../Head/Head";
 import About from "../About/About";
@@ -10,14 +10,22 @@ import { Button, Modal, FormControl } from "react-bootstrap";
 import ColorPicker from "../Color/ColorPicker";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { SaveCapabilityStatement } from "../../../store/actions/PDF/pdf.actions";
+import { GetUserSpeicificStatement, SaveCapabilityStatement } from "../../../store/actions/PDF/pdf.actions";
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 const PDFVersion_B = () => {
-  const pdf = useSelector((state) => state.pdf);
+  const Data = useSelector((state) => state.pdf);
+  const pdf=Data.values
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate()
+  const queryString = location?.search; // This will be "?Salman.pdf"
+  // Remove the leading "?" character
+  const queryParamValue = queryString.slice(1);
   const [intialState, setIntialState] = useState({
     userId: 2,
+    version:"B",
     pdf_name: pdf?.pdf_name,
     company_info: pdf.company_info,
     company_address1: pdf.company_address1,
@@ -40,6 +48,37 @@ const PDFVersion_B = () => {
   const [pdfName, setPdfName] = useState("");
 
 
+  useEffect(() => {
+    if (queryParamValue) {
+      dispatch(GetUserSpeicificStatement(queryParamValue, navigate))
+      setIntialState({
+        ...intialState,pdf
+      })
+    }
+  }, [queryParamValue]);
+  useEffect(() => {
+    setIntialState(
+    {
+    userId: 2,
+    version: "B",
+    pdf_name: pdf?.pdf_name,
+    company_info: pdf.company_info,
+    company_address1: pdf.company_address1,
+    company_address2: pdf.company_address2,
+    owner_name: pdf.owner_name,
+    owner_email: pdf.owner_email,
+    owner_phone: pdf.owner_phone,
+    url: pdf.url,
+    about_us: pdf.about_us,
+    core_competencies: pdf.core_competencies,
+    core_competencies_image: pdf.core_competencies_image,
+    core_competencies_info: pdf.core_competencies_info,
+    past_performance: pdf.past_performance,
+    past_performance_image: pdf.past_performance_image,
+    difference: pdf.difference,
+  }
+    );
+  }, [pdf]);
 
   const handleOnChange = (e) => {
 
@@ -112,7 +151,7 @@ const PDFVersion_B = () => {
             handleOnChange={handleOnChange}
             intialState={intialState}
             isEditMode={isEditMode}
-            Logo_Url={pdf?.logo_url}
+            Logo_Url={Data?.logo_url}
           />
           <About
             handleOnChange={handleOnChange}
@@ -164,7 +203,7 @@ const PDFVersion_B = () => {
           {/* <Button variant="primary" size="lg" onClick={handlePrint}>
             Print
           </Button> */}
-          <Button disabled={pdf.loading} variant="primary" size="lg" onClick={handleSave}>
+          <Button disabled={Data.loading} variant="primary" size="lg" onClick={handleSave}>
             Save
           </Button>
         </Modal.Footer>

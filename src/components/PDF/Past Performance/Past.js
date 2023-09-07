@@ -43,7 +43,7 @@ const Past = ({ isEditMode, intialState, handleOnChange }) => {
             as="textarea"
             rows="5"
             cols={65}
-            name="pastPerformance"
+            name="past_performance"
             placeholder="Enter Past Performance (use = to display in cols and rows)"
             value={intialState.past_performance}
             onChange={handleOnChange}
