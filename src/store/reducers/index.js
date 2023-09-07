@@ -46,9 +46,11 @@ import {
   companyWorkReducer, companyWorkUpdateReducer, companyInsuranceReducer, companyInsuranceUpdateReducer, companySafetyReducer, companySafetyUpdateReducer,
   companyFinanceReducer, companyFinanceUpdateReducer, companyLegalReducer, companyLegalUpdateReducer, companyShippingReducer, companyShippingUpdateReducer,
   companySupplierReducer, companySupplierUpdateReducer, projectTypesReducer } from "./companyDetails/companyDetailsReducer";
+import { pdfReducer } from "./pdf/pdf.reducer";
 
 export default combineReducers({
   auth,
+  pdf:pdfReducer,
   projects,
   comments,
   proposalCreate: proposalCreateReducer,

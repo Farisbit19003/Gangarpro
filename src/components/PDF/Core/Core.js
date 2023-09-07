@@ -2,21 +2,13 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import "./Core.css";
 
-const Core = ({
-  isEditMode,
-  coreCompetencies,
-  setCoreCompetencies,
-  coreCompetenciesInfo,
-  setCoreCompetenciesInfo,
-  coreCompetenciesImage,
-  setCoreCompetenciesImage
-}) => {
+const Core = ({ isEditMode, intialState, handleOnChange }) => {
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = (e) => {
-      setCoreCompetenciesImage(e.target.result);
+      intialState.core_competencies_image(e.target.result);
     };
 
     if (file) {
@@ -34,12 +26,13 @@ const Core = ({
               as="textarea"
               rows={4}
               placeholder="Enter Core Competencies (use = to make bullets)"
-              value={coreCompetencies}
-              onChange={(e) => setCoreCompetencies(e.target.value)}
+              name="core_competencies"
+              value={intialState.core_competencies}
+              onChange={handleOnChange}
             />
           ) : (
             <ul className="core-list">
-              {coreCompetencies.split("=").map((item, index) => (
+              {intialState.core_competencies.split("=").map((item, index) => (
                 <li key={index}>{item}</li>
               ))}
             </ul>
@@ -50,52 +43,40 @@ const Core = ({
           {isEditMode ? (
             <div className="edit-core">
               <div className="edit_core_info">
-              <Form.Label>Scope</Form.Label>
-              <Form.Control
-                type="text"
-                value={coreCompetenciesInfo.scope}
-                onChange={(e) =>
-                  setCoreCompetenciesInfo({
-                    ...coreCompetenciesInfo,
-                    scope: e.target.value,
-                  })
-                }
-              />
+                <Form.Label>Scope</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="core_competencies_info"
+                  value={intialState.core_competencies_info.scope}
+                  onChange={handleOnChange}
+                />
               </div>
               <div className="edit_core_info">
-              <Form.Label>NAICS</Form.Label>
-              <Form.Control
-                type="text"
-                value={coreCompetenciesInfo.naics}
-                onChange={(e) =>
-                  setCoreCompetenciesInfo({
-                    ...coreCompetenciesInfo,
-                    naics: e.target.value,
-                  })
-                }
-              />
+                <Form.Label>NAICS</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="core_competencies_info."
+                  value={intialState.core_competencies_info.naics}
+                  onChange={handleOnChange}
+                />
               </div>
               <div className="edit_core_info">
-              <Form.Label>DUNS</Form.Label>
-              <Form.Control
-                type="text"
-                value={coreCompetenciesInfo.duns}
-                onChange={(e) =>
-                  setCoreCompetenciesInfo({
-                    ...coreCompetenciesInfo,
-                    duns: e.target.value,
-                  })
-                }
-              />
+                <Form.Label>DUNS</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="core_competencies_info"
+                  value={intialState.core_competencies_info.duns}
+                  onChange={handleOnChange}
+                />
               </div>
             </div>
           ) : (
             <p className="core_p">
-              Scope – {coreCompetenciesInfo.scope}
+              Scope – {intialState.core_competencies_info.scope}
               <br />
-              NAICS – {coreCompetenciesInfo.naics}
+              NAICS – {intialState.core_competencies_info.naics}
               <br />
-              DUNS – {coreCompetenciesInfo.duns}
+              DUNS – {intialState.core_competencies_info.duns}
               <br />
             </p>
           )}
@@ -109,10 +90,10 @@ const Core = ({
               onChange={handleImageUpload}
             />
           ) : (
-            coreCompetenciesImage && (
+            intialState.core_competencies_inage && (
               <img
                 className="core_img"
-                src={coreCompetenciesImage}
+                src={intialState.core_competencies_image}
                 alt="Uploaded"
               />
             )

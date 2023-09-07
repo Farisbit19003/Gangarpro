@@ -8,45 +8,40 @@ import CCP from "./CCP/CCP";
 import { FaEdit } from "react-icons/fa";
 import { Button, Modal, FormControl } from "react-bootstrap";
 import ColorPicker from "./Color/ColorPicker";
+import { useSelector } from "react-redux";
 
 const PDF = () => {
+  const pdf = useSelector((state) => state.pdf);
+  console.log("pdf=>", pdf);
+  const [intialState, setIntialState] = useState({
+    userId: 2,
+    pdf_name: "",
+    company_info: pdf.company_info,
+    company_address1: pdf.company_address1,
+    company_address2: pdf.company_address2,
+    owner_name: pdf.owner_name,
+    owner_email: pdf.owner_email,
+    owner_phone: pdf.owner_phone,
+    url: pdf.url,
+    about_us: pdf.about_us,
+    core_competencies: pdf.core_competencies,
+    core_competencies_image: pdf.core_competencies_image,
+    core_competencies_info: pdf.core_competencies_info,
+    past_performance: pdf.past_performance,
+    past_performance_image: pdf.past_performance_image,
+    difference: pdf.difference,
+  });
   const [borderColor, setBorderColor] = useState("black");
   const [isEditMode, setIsEditMode] = useState(false);
   const [showPopup, setShowPopup] = useState(false); // State to control the pop-up
   const [logoUrl, setLogoUrl] = useState("");
   const [pdfName, setPdfName] = useState("");
-  const [companyInfo, setCompanyInfo] = useState(
-    "Construction Clean Partners LLC"
-  );
-  const [companyAddress1, setCompanyAddress1] = useState(
-    "715 Peachtree St, Ste 100"
-  );
-  const [companyAddress2, setCompanyAddress2] = useState("Atlanta, GA 30308 ");
-  const [ownerName, setOwnerName] = useState("Aduvie Okoh");
-  const [ownerPhone, setOwnerPhone] = useState("(202) 544-1353");
-  const [ownerEmail, setOwnerEmail] = useState("aduvie@final‐clean.com");
-  const [url, setUrl] = useState("https://final‐clean.com/");
-  const [aboutUs, setAboutUs] = useState(
-    "Construction Clean Partners works with commercial general contractors as a subcontractor completing the post construction final clean scope. We estimate cleaning bids via the plans and physical site visit walk throughs. CCP mobilizes employee labor and equipment to new construction and renovation commercial projects to help clean interior building sites."
-  );
-  const [coreCompetencies, setCoreCompetencies] = useState(
-    "Interior post construction cleanup=Pressure washing=Window washing=Covid disinfection and sanitation"
-  );
-  const [coreCompetenciesInfo, setCoreCompetenciesInfo] = useState({
-    scope: "Final clean",
-    naics: "561720",
-    duns: "067345638",
-  });
+ 
 
-  const [coreCompetenciesImage, setCoreCompetenciesImage] = useState("");
-  const [pastPerformance, setPastPerformance] = useState(
-    "Canaan Crossing=Woda Cooper Companies=Allora At the Exchange=CORE Construction=Intrada Westside=JM Wilkerson=Harris County Carver Middle School=Freeman & Associates"
-  );
-  const [pastPerformanceImage, setPastPerformanceImage] = useState("");
-  const [difference, setDifference] = useState(
-    "We have been awarded contracts in over 41 cities. We have 9 managers and offices located around the USA that can supervise our local labor and equipment. CCP can get a site visit to confirm scope and pricing within 48 hours notice anywhere in the USA. We will always mobilize within an hour of your job site."
-  );
 
+  const handleOnChange = () => {
+    setIntialState();
+  };
   const handleEditClick = () => {
     setIsEditMode(true);
   };
@@ -93,48 +88,28 @@ const PDF = () => {
       <div id="pdfContainer" className="PDF" style={{ borderColor }}>
         <div className="PDF_main">
           <Head
-            logoUrl={logoUrl}
-            setLogoUrl={setLogoUrl}
-            companyInfo={companyInfo}
-            setCompanyInfo={setCompanyInfo}
-            companyAddress1={companyAddress1}
-            setCompanyAddress1={setCompanyAddress1}
-            companyAddress2={companyAddress2}
-            setCompanyAddress2={setCompanyAddress2}
-            ownerName={ownerName}
-            setOwnerName={setOwnerName}
-            ownerPhone={ownerPhone}
-            setOwnerPhone={setOwnerPhone}
-            ownerEmail={ownerEmail}
-            setOwnerEmail={setOwnerEmail}
-            url={url}
-            setUrl={setUrl}
+            handleOnChange={handleOnChange}
+            intialState={intialState}
             isEditMode={isEditMode}
           />
           <About
-            aboutUs={aboutUs}
-            setAboutUs={setAboutUs}
+            handleOnChange={handleOnChange}
+            intialState={intialState}
             isEditMode={isEditMode}
           />
           <Core
-            coreCompetencies={coreCompetencies}
-            setCoreCompetencies={setCoreCompetencies}
-            coreCompetenciesInfo={coreCompetenciesInfo}
-            setCoreCompetenciesInfo={setCoreCompetenciesInfo}
-            coreCompetenciesImage={coreCompetenciesImage}
-            setCoreCompetenciesImage={setCoreCompetenciesImage}
+            handleOnChange={handleOnChange}
+            intialState={intialState}
             isEditMode={isEditMode}
           />
           <Past
-            pastPerformance={pastPerformance}
-            setPastPerformance={setPastPerformance}
-            pastPerformanceImage={pastPerformanceImage}
-            setPastPerformanceImage={setPastPerformanceImage}
+            handleOnChange={handleOnChange}
+            intialState={intialState}
             isEditMode={isEditMode}
           />
           <CCP
-            difference={difference}
-            setDifference={setDifference}
+            handleOnChange={handleOnChange}
+            intialState={intialState}
             isEditMode={isEditMode}
           />
         </div>
