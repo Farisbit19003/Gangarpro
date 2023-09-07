@@ -11,7 +11,7 @@ const Head = ({ isEditMode, intialState, handleOnChange,Logo_Url}) => {
             <img className="logo" src={Logo_Url?Logo_Url:"../ccp-logo.png"} alt="default-logo" />
           </div>
           <div className="heading">
-            <h2 className="head_h">CAPTABILTIES STATEMENT</h2>
+            <h2 className="head_h">CAPABILTIES STATEMENT</h2>
           </div>
         </div>
 
