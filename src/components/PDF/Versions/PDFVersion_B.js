@@ -71,15 +71,15 @@ const PDFVersion_B = () => {
     dispatch(SaveCapabilityStatement(intialState, setIsEditMode, setShowPopup))
 
     // Show only the content within the PDF div
-    const pdfContainer = document.getElementById("pdfContainer");
-    const originalDisplayStyle = pdfContainer.style.display;
-    pdfContainer.style.display = "flex";
+   // const pdfContainer = document.getElementById("pdfContainer");
+   // const originalDisplayStyle = pdfContainer.style.display;
+   // pdfContainer.style.display = "flex";
 
     // Print the content
-    window.print();
+    //window.print();
 
     // Restore the original display style
-    pdfContainer.style.display = originalDisplayStyle;
+   // pdfContainer.style.display = originalDisplayStyle;
   };
 
 
@@ -139,7 +139,7 @@ const PDFVersion_B = () => {
         </div>
       </div>
 
-      <Button variant="danger" size="lg" onClick={handlePopup}>
+      <Button variant="primary" size="lg" onClick={handlePopup}>
         Save
       </Button>
 

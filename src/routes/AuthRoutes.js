@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { NavbarContext } from "../App";
 import { Route, Routes } from "react-router-dom";
-//import Navbar from "../components/navbar/Navbar";
+import Navbar from "../components/navbar/Navbar";
 import ProtectedRoute from "../components/helpers/ProtectRoute";
 import Profile from "../views/profile";
 import PricingPage from "../views/pricing";
@@ -28,7 +28,7 @@ const AuthRoutes = () => {
   const { showLargeScreenNav } = useContext(NavbarContext);
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <div
       // className={classNames(
       //   "page-container",

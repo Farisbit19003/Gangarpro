@@ -39,6 +39,7 @@
   flex-direction: row !important;
   justify-content: space-between !important;
   align-content: center;
+  margin:1rem;
 }
 
 .edit-button:hover {
