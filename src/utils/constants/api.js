@@ -6,6 +6,10 @@ export const api = {
     passwordReset: "password_reset/",
     passwordResetConfirm: "password_reset/confirm/",
   },
+  PDF: {
+    TotalStatements: "statements/get_total_statements?userId=2",
+    capabilityStatement:"statements/capability_statement"
+  },
   proposals: {
     saveProposal: "proposals",
     getAllProposal: "proposals",

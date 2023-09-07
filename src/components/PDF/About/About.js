@@ -2,7 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import "./About.css";
 
-const About = ({ isEditMode, aboutUs, setAboutUs }) => {
+const About = ({ isEditMode, intialState, handleOnChange }) => {
   return (
     <div className="About">
       <h1 className="about_h">About Us</h1>
@@ -12,11 +12,12 @@ const About = ({ isEditMode, aboutUs, setAboutUs }) => {
           className="edit-textarea"
           as="textarea"
           rows={3}
-          value={aboutUs}
-          onChange={(event) => setAboutUs(event.target.value)}
+          name="about_us"
+          value={intialState.about_us}
+          onChange={handleOnChange}
         />
       ) : (
-        <div className="about-content">{aboutUs}</div>
+        <div className="about-content">{intialState.about_us}</div>
       )}
     </div>
   );

@@ -2,27 +2,23 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import "./CCP.css";
 
-const CCP = ({ isEditMode, difference, setDifference }) => {
-  const handleTextChange = (event) => {
-    if (isEditMode) {
-      setDifference(event.target.value);
-    }
-  };
-
+const CCP = ({ isEditMode, intialState, handleOnChange,page }) => {
   return (
     <div className="ccp">
-      <h1 className="ccp_h">What’s the CCP difference?</h1>
+
+      <h1 className="ccp_h">{page==="VersionB"?"DIFFERENTIATORS":"What’s the CCP difference?"}</h1>
 
       {isEditMode ? (
         <Form.Control
           className="edit-textarea"
           as="textarea"
           rows={4}
-          value={difference}
-          onChange={handleTextChange}
+          name="difference"
+          value={intialState.difference}
+          onChange={handleOnChange}
         />
       ) : (
-        <p>{difference}</p>
+        <p>{intialState.difference}</p>
       )}
     </div>
   );

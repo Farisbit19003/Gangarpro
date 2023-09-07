@@ -2,31 +2,13 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import "./Head.css";
 
-const Head = ({
-  isEditMode,
-  logoUrl,
-  setLogoUrl,
-  companyInfo,
-  setCompanyInfo,
-  companyAddress1,
-  setCompanyAddress1,
-  companyAddress2,
-  setCompanyAddress2,
-  ownerName,
-  setOwnerName,
-  ownerPhone,
-  setOwnerPhone,
-  ownerEmail,
-  setOwnerEmail,
-  url,
-  setUrl,
-}) => {
+const Head = ({ isEditMode, intialState, handleOnChange,Logo_Url }) => {
   return (
     <>
       <div className="head">
         <div className="main">
           <div className="logo">
-            <img className="logo" src="../ccp-logo.png" alt="default-logo" />
+            <img className="logo" src={Logo_Url?Logo_Url:"../ccp-logo.png"} alt="default-logo" />
           </div>
           <div className="heading">
             <h2 className="head_h">CAPTABILTIES STATEMENT</h2>
@@ -40,58 +22,65 @@ const Head = ({
                 className="edit"
                 type="text"
                 placeholder="compony info"
-                value={companyInfo}
-                onChange={(e) => setCompanyInfo(e.target.value)}
+                name="company_info"
+                value={intialState.company_info}
+                onChange={handleOnChange}
               />
               <Form.Control
                 className="edit"
                 type="text"
+                name="company_address1"
                 placeholder="company address 1"
-                value={companyAddress1}
-                onChange={(e) => setCompanyAddress1(e.target.value)}
+                value={intialState.company_address1}
+                onChange={handleOnChange}
               />
               <Form.Control
                 className="edit"
                 type="text"
-                placeholder=""
-                value={companyAddress2}
-                onChange={(e) => setCompanyAddress2(e.target.value)}
+                placeholder="companyAddress2"
+                name="company_address2"
+                value={intialState.company_address2}
+                onChange={handleOnChange}
               />
               <Form.Control
                 className="edit"
                 type="text"
-                value={ownerName}
-                onChange={(e) => setOwnerName(e.target.value)}
+                name="owner_name"
+                value={intialState.owner_name}
+                onChange={handleOnChange}
               />
               <Form.Control
                 className="edit"
                 type="text"
-                value={ownerPhone}
-                onChange={(e) => setOwnerPhone(e.target.value)}
+                name="owner_phone"
+                value={intialState.owner_phone}
+                onChange={handleOnChange}
               />
               <Form.Control
                 className="edit"
                 type="text"
-                value={ownerEmail}
-                onChange={(e) => setOwnerEmail(e.target.value)}
+                name="owner_email"
+                value={intialState.owner_email}
+                onChange={handleOnChange}
               />
               <Form.Control
                 className="edit-textarea"
                 as="textarea"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
+                name="url"
+                value={intialState.url}
+                onChange={handleOnChange}
               />
             </>
           ) : (
             <>
-              <p className="company-info">{companyInfo}</p>
-              <p className="company-address">{companyAddress1}</p>
-              <p className="company-address">{companyAddress2}</p>
-              <p className="owner-info">{ownerName}</p>
-              <p className="owner-info">{ownerPhone}</p>
-              <p className="owner-info">{ownerEmail}</p>
+              <p className="company-info">{intialState.company_info}</p>
+              <p className="company-address">{intialState.company_address1}</p>
+              <p className="company-address">{intialState.company_address2}</p>
+              <p className="owner-info">{intialState.owner_name}</p>
+              <p className="owner-info">{intialState.owner_phone}</p>
+              <p className="owner-info">{intialState.owner_email}</p>
               <p className="website">
-                <a href={url}>{url}</a>
+                <a href={intialState.url}>{intialState.url}</a>
               </p>
             </>
           )}

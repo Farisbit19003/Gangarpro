@@ -21,6 +21,8 @@ import Calculator from "../views/cleanupCalculator/calculator_index";
 import CleanupRates from "../views/cleanupCalculator/cleanup_rates";
 import CompanyDetailsForms from "../views/prequelMasterKey/CompanyDetailsForms";
 import PDF from "../components/PDF/PDF";
+import PDFVersion_A from "../components/PDF/Versions/PDFVersion_A"
+import PDFVersion_B from "../components/PDF/Versions/PDFVersion_B"
 
 const AuthRoutes = () => {
   const { showLargeScreenNav } = useContext(NavbarContext);
@@ -92,7 +94,10 @@ const AuthRoutes = () => {
             }
           />
           {/* PDF */}
-          <Route path="/pdf" element={<PDF />} />
+          <Route path="/pdf" element={<PDF/>} />
+          <Route path="/pdf/Version-A" element={<PDFVersion_A />} />
+          <Route path="/pdf/Version-B" element={<PDFVersion_B />} />
+
         </Routes>
       </div>
     </>
