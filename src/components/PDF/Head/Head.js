@@ -2,7 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import "./Head.css";
 
-const Head = ({ isEditMode, intialState, handleOnChange,Logo_Url }) => {
+const Head = ({ isEditMode, intialState, handleOnChange,Logo_Url}) => {
   return (
     <>
       <div className="head">
