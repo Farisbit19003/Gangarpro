@@ -3,12 +3,13 @@
   margin: 15px 15px;
   font-family: Arial, sans-serif;
   display: flex;
-  border: 2px solid ;
+  
   justify-content: center;
   align-items: center;
 }
 
 .PDF_main {
+  border: 2px solid ;
   font-size: medium;
   width: 850px;
   padding: 2rem;

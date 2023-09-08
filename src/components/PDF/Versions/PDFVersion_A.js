@@ -151,8 +151,8 @@ const PDFVersion_A = () => {
           </Button>
         )}
       </div>
-      <div id="pdfContainer" className="PDF" style={{ borderColor }}>
-        <div className="PDF_main">
+      <div id="pdfContainer" className="PDF" >
+        <div className="PDF_main" style={{ borderColor }}>
           <Head
             handleOnChange={handleOnChange}
             intialState={intialState}
