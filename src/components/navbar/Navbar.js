@@ -80,7 +80,7 @@ const Navbar = () => {
   }, [dispatch, user]);
 
   return (
-    <div className="">
+    <div id="nb">
       <div className="">
         {/* <SidebarV2
           toggleSideBar={toggleSideBar}

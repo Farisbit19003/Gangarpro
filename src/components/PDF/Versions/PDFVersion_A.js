@@ -129,14 +129,14 @@ const PDFVersion_A = () => {
 
   return (
     <>
-      <div className="edit">
+      <div id="nb" className="edit">
         <ColorPicker
           borderColor={borderColor}
           onBorderColorChange={handleBorderColorChange}
         />
         {!isEditMode && (
           <div className="edit-button" onClick={handleEditClick}>
-            <FaEdit size={20} />
+            <FaEdit size={20}/>
           </div>
         )}
         {isEditMode && (
@@ -157,21 +157,25 @@ const PDFVersion_A = () => {
             isEditMode={isEditMode}
             Logo_Url={Data?.logo_url}
           />
+          <br/>
           <About
             handleOnChange={handleOnChange}
             intialState={intialState}
             isEditMode={isEditMode}
           />
+           <br/>
           <Core
             handleOnChange={handleOnChange}
             intialState={intialState}
             isEditMode={isEditMode}
           />
+           <br/>
           <Past
             handleOnChange={handleOnChange}
             intialState={intialState}
             isEditMode={isEditMode}
           />
+           <br/>
           <CCP
             handleOnChange={handleOnChange}
             intialState={intialState}

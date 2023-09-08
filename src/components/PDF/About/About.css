@@ -1,8 +1,7 @@
 .About{
     display: flex;
     flex-direction: column;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    text-align: start;
 }
 .about_h{
     font-size: x-large;

@@ -50,6 +50,9 @@
   body * {
     visibility: hidden;
   }
+  #nb{
+    display: none !important;
+  }
   #pdfContainer, #pdfContainer * {
     visibility: visible;
   }

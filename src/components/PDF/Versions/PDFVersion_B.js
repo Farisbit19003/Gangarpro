@@ -135,7 +135,7 @@ const PDFVersion_B = () => {
 
   return (
     <>
-      <div className="edit">
+      <div id="nb" className="edit">
         <ColorPicker
           borderColor={borderColor}
           onBorderColorChange={handleBorderColorChange}
@@ -155,22 +155,26 @@ const PDFVersion_B = () => {
             isEditMode={isEditMode}
             Logo_Url={Data?.logo_url}
           />
+          <br/>
           <About
             handleOnChange={handleOnChange}
             intialState={intialState}
             isEditMode={isEditMode}
           />
+          <br/>
           <Core
             handleOnChange={handleOnChange}
             intialState={intialState}
             isEditMode={isEditMode}
             page="VersionB"
           />
+          <br/>
           <Past
             handleOnChange={handleOnChange}
             intialState={intialState}
             isEditMode={isEditMode}
           />
+          <br/>
           <CCP
             handleOnChange={handleOnChange}
             intialState={intialState}
