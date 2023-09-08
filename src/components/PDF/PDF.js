@@ -50,7 +50,7 @@ const handleEdit=(p)=>{
 
           }
        
-          <Button onClick={onClick} className="btn" variant="primary" size="lg">
+          <Button onClick={onClick} className="create_btn" variant="primary" size="lg">
             Create New
           </Button>
         </div>
