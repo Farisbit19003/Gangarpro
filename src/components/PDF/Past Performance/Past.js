@@ -16,6 +16,13 @@ const Past = ({ isEditMode, intialState, handleOnChange }) => {
     }
   };
 
+  const handlePerformanceChange = (index, column, value) => {
+    const performanceData = intialState.past_performance.split("=");
+    performanceData[index * 2 + column] = value;
+    const updatedPerformance = performanceData.join("=");
+    handleOnChange({ target: { name: "past_performance", value: updatedPerformance } });
+  };
+
   return (
     <div className="past">
       <div className="past_img">
@@ -39,30 +46,51 @@ const Past = ({ isEditMode, intialState, handleOnChange }) => {
       <div className="performance">
         <h1>Past Performance</h1>
         {isEditMode ? (
-          <Form.Control
-            as="textarea"
-            rows="5"
-            cols={65}
-            name="past_performance"
-            placeholder="Enter Past Performance (use = to display in cols and rows)"
-            value={intialState.past_performance}
-            onChange={handleOnChange}
-          />
+         <tbody>
+              {[0, 1, 2, 3].map((index) => (
+                <tr key={index}>
+                  <td>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Performance"
+                      name={`past_performance[${index}][0]`}
+                      value={
+                        intialState.past_performance.split("=")[index * 2] || ""
+                      }
+                      onChange={(e) =>
+                        handlePerformanceChange(index, 0, e.target.value)
+                      }
+                    />
+                  </td>
+                  <td>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Performance"
+                      name={`past_performance[${index}][1]`}
+                      value={
+                        intialState.past_performance.split("=")[
+                          index * 2 + 1
+                        ] || ""
+                      }
+                      onChange={(e) =>
+                        handlePerformanceChange(index, 1, e.target.value)
+                      }
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
         ) : (
           <table className="performance-table">
             <tbody>
-              {intialState.past_performance.split("=").map(
-                (item, index) =>
-                  index % 2 === 0 && (
-                    <tr key={index}>
-                      <td>{item}</td>
-                      <td>
-                        {intialState.past_performance.split("=")[index + 1] ||
-                          ""}
-                      </td>
-                    </tr>
-                  )
-              )}
+              {intialState.past_performance.split("=").map((item, index) => (
+                index % 2 === 0 && (
+                  <tr key={index}>
+                    <td>{item}</td>
+                    <td>{intialState.past_performance.split("=")[index + 1] || ""}</td>
+                  </tr>
+                )
+              ))}
             </tbody>
           </table>
         )}

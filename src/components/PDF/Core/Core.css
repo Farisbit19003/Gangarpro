@@ -30,5 +30,6 @@
 }
 .edit_core_info{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 0.5rem;
 }

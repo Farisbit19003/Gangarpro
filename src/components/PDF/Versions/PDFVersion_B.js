@@ -185,7 +185,7 @@ const PDFVersion_B = () => {
       </div>
 
      
-      <div className="s-p">
+      <div className="s-p" id="nb">
       <Button variant="primary" size="lg" onClick={handlePopup}>
         Save
       </Button>

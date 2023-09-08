@@ -64,8 +64,8 @@ const Head = ({ isEditMode, intialState, handleOnChange,Logo_Url}) => {
                 onChange={handleOnChange}
               />
               <Form.Control
-                className="edit-textarea"
-                as="textarea"
+                className="edit"
+                type="text"
                 name="url"
                 value={intialState.url}
                 onChange={handleOnChange}

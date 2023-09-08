@@ -96,6 +96,7 @@ const PDFVersion_A = () => {
     setShowPopup(true); // Show the pop-up
   };
   const handleSave = (e) => {
+   
     // Check if any field is empty
     const isEmptyField = Object.values(intialState).some((value) => value === "");
 
@@ -105,7 +106,7 @@ const PDFVersion_A = () => {
     }
 
     dispatch(SaveCapabilityStatement(intialState, setIsEditMode, setShowPopup))
-
+      
     
   };
 
@@ -184,7 +185,7 @@ const PDFVersion_A = () => {
         </div>
       </div>
 
-      <div className="s-p">
+      <div className="s-p" id="nb">
       <Button variant="primary" size="lg" onClick={handlePopup}>
         Save
       </Button>
