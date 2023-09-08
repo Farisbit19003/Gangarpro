@@ -96,17 +96,19 @@ const PDFVersion_A = () => {
     setShowPopup(true); // Show the pop-up
   };
   const handleSave = (e) => {
+    let formData=new FormData();
+    for (const key in intialState) {
+      if (intialState[key] !== undefined) {
+        formData.append(key, intialState[key]);
+      }
+    }
     // Check if any field is empty
     const isEmptyField = Object.values(intialState).some((value) => value === "");
-
     if (isEmptyField) {
       toast.error("Please fill in all fields before submitting.");
       return;
     }
-
-    dispatch(SaveCapabilityStatement(intialState, setIsEditMode, setShowPopup))
-      
-    
+    dispatch(SaveCapabilityStatement(formData,setIsEditMode, setShowPopup))
   };
 
   const handlePrint = (e) => {

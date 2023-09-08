@@ -6,9 +6,12 @@ import { useDispatch } from "react-redux";
 import { DeleteStatement, GetTotalStatement, GetUserSpeicificStatement } from "../../store/actions/PDF/pdf.actions";
 import { useSelector } from "react-redux";
 import { Button, Modal, FormControl } from "react-bootstrap";
+import PDFVersion_A from "./Versions/PDFVersion_A";
+import PDFVersion_B from "./Versions/PDFVersion_B";
 
 const PDF = () => {
   const {pdfs,loading} = useSelector((state) => state.pdf);
+  const [version,setVersion]=useState("");
   const [ok, setOk] = useState(false);
   const [showPopup, setShowPopup] = useState(false); // State to control the pop-up
   const [DeleteName, setDeleteName] = useState(""); // State to control the pop-up
@@ -30,40 +33,46 @@ const handleEdit=(p)=>{
   useEffect(()=>{
   dispatch(GetTotalStatement());
   },[])
+
+  const handleVersion=(v)=>{
+  setVersion(v);
+  }
   return (
     <>
-      {!ok ? (
-        <div className="CCP_List">
-          <h1 className="head">CCP PDFS</h1>
-          {pdfs?.map((p)=>{
-            return(
-              <div className="pdf_list">
-              {p}
-              <span className="icons">
-                {" "}
-                <AiOutlineEdit cursor="pointer"  onClick={()=>handleEdit(p)} size={20} color="blue" />{" "}
-                <AiFillDelete cursor="pointer" onClick={()=>handleDelete(p)} size={20} color="red" />
-              </span>
-            </div>  
-            )
-          })
-
-          }
+      {ok && version==="" ? (
        
-          <Button onClick={onClick} className="create_btn" variant="primary" size="lg">
-            Create New
-          </Button>
-        </div>
-      ) : (
         <div className="version">
-          <Link className="link" to="/pdf/Version-A">
-            <div className="v_box">Version A</div>
-          </Link>
-          <Link className="link" to="/pdf/Version-B">
-            <div className="v_box">Version B</div>
-          </Link>
-        </div>
+        <Link className="link" onClick={()=>handleVersion("A")} >
+          <div className="v_box">Version A</div>
+        </Link>
+        <Link className="link" onClick={()=>handleVersion("B")} >
+          <div className="v_box" >Version B</div>
+        </Link>
+      </div>
+      ) : (
+        <div className="CCP_List">
+        <h1 className="head">CCP PDFS</h1>
+        {pdfs?.map((p)=>{
+          return(
+            <div className="pdf_list">
+            {p}
+            <span className="icons">
+              {" "}
+              <AiOutlineEdit cursor="pointer"  onClick={()=>handleEdit(p)} size={20} color="blue" />{" "}
+              <AiFillDelete cursor="pointer" onClick={()=>handleDelete(p)} size={20} color="red" />
+            </span>
+          </div>  
+          )
+        })
+
+        }
+     
+        <Button onClick={onClick} className="create_btn" variant="primary" size="lg">
+          Create New
+        </Button>
+      </div>
       )}
+      {version==="A"? <PDFVersion_A /> : version==="B"?<PDFVersion_B />:""}
        <Modal show={showPopup} onHide={()=>setShowPopup(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Are you Sure You want to Delete?</Modal.Title>

@@ -99,6 +99,12 @@ const PDFVersion_B = () => {
     setShowPopup(true); // Show the pop-up
   };
   const handleSave = (e) => {
+    let formData=new FormData();
+    for (const key in intialState) {
+      if (intialState[key] !== undefined) {
+        formData.append(key, intialState[key]);
+      }
+    }
     // Check if any field is empty
     const isEmptyField = Object.values(intialState).some((value) => value === "");
 
@@ -107,7 +113,7 @@ const PDFVersion_B = () => {
       return;
     }
 
-    dispatch(SaveCapabilityStatement(intialState, setIsEditMode, setShowPopup))
+    dispatch(SaveCapabilityStatement(formData, setIsEditMode, setShowPopup))
 
    
   };

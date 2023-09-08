@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import "./Past.css";
+import { toast } from "react-toastify";
 
 const Past = ({ isEditMode, intialState, handleOnChange }) => {
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-      intialState.past_performance_image=e.target.result;
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
+  const[file,setFile]=useState("")
+  const handleImageUpload = (e) => {
+    const file_current = e.target.files[0];
+    setFile(e.target.files[0])
+    if (file_current.size > 1024000) {
+      toast.error("File size cannot exceed more than 1MB" );
+    } else {
+      handleOnChange({ target: { name: "past_performance_image", value: file_current } });
     }
   };
 
@@ -55,7 +54,7 @@ const Past = ({ isEditMode, intialState, handleOnChange }) => {
                       placeholder="Enter Performance"
                       name={`past_performance[${index}][0]`}
                       value={
-                        intialState.past_performance.split("=")[index * 2] || ""
+                        intialState.past_performance?.split("=")[index * 2] || ""
                       }
                       onChange={(e) =>
                         handlePerformanceChange(index, 0, e.target.value)
@@ -68,7 +67,7 @@ const Past = ({ isEditMode, intialState, handleOnChange }) => {
                       placeholder="Enter Performance"
                       name={`past_performance[${index}][1]`}
                       value={
-                        intialState.past_performance.split("=")[
+                        intialState.past_performance?.split("=")[
                           index * 2 + 1
                         ] || ""
                       }
@@ -83,11 +82,11 @@ const Past = ({ isEditMode, intialState, handleOnChange }) => {
         ) : (
           <table className="performance-table">
             <tbody>
-              {intialState.past_performance.split("=").map((item, index) => (
+              {intialState.past_performance?.split("=").map((item, index) => (
                 index % 2 === 0 && (
                   <tr key={index}>
                     <td>{item}</td>
-                    <td>{intialState.past_performance.split("=")[index + 1] || ""}</td>
+                    <td>{intialState.past_performance?.split("=")[index + 1] || ""}</td>
                   </tr>
                 )
               ))}

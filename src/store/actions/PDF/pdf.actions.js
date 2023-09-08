@@ -1,4 +1,7 @@
 import { toast } from "react-toastify";
+import axios from 'axios';
+import { api } from "../../../utils/constants/api";
+import { isEmpty, toastSuccess } from "../../../utils/helpers/helper";
 import { CapabilityStatement, DeleteUserStatement, GetSpecificStatement, TotalStatement } from "../../../utils/requests/pdf";
 import { PDFSAVING_SUCCESS, PDFSAVING_START, PDFSAVING_FAILED, GetTotalStatement_FAILED, GetTotalStatement_SUCCESS, GetSpecificStatement_SUCCESS, GetSpecificStatement_FAILED } from "../../actionTypes";
 
@@ -49,24 +52,51 @@ export const GetTotalStatementFailed = (Error) => {
   };
 };
 
-export const SaveCapabilityStatement = (PDFDetail, setIsEditMode, setShowPopup) => {
-  return async (dispatch) => {
+export const SaveCapabilityStatement= (formData,setIsEditMode,setShowPopup) => async (dispatch, getState) => {
+  try {
     dispatch(SavingPDFStart());
 
-    return CapabilityStatement(PDFDetail)
-      .then(async (response) => {
-        await dispatch(SavingPDFSuccess(response));
-        toast.success("PDF Save Successful");
-        setIsEditMode(false)
-        setShowPopup(false);
-      })
-      .catch((error) => {
-        toast.error("PDF Saving Failed")
-        dispatch(SavingPDFFailed("PDF Saving Failed"));
-        setIsEditMode(false)
-        setShowPopup(false);
-      });
-  };
+    let { access } = getState();
+    if (isEmpty(access)) {
+      access = JSON.parse(localStorage.getItem('token'));
+    }
+
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+        Authorization: `Bearer ${access}`,
+      },
+    };
+
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/api/v1/`+api.PDF.capabilityStatement,
+      formData,
+      config
+    );
+    if(data.error)
+    {
+      toast.error(data.error);
+      setIsEditMode(false);
+      setShowPopup(false);
+    }
+    else{
+      toast.success("PDF Saved");
+      setIsEditMode(false);
+      setShowPopup(false);
+      dispatch(SavingPDFSuccess(data));
+    }
+    dispatch(GetTotalStatement())
+  } catch (error) {
+    const message =
+      error.response && error.response.data
+        ? error.response.data
+        : error.message;
+    if (message === 'Not authorized, token failed') {
+      // Handle logout or other actions as needed
+    }
+    toast.error(message+"PDF Saving failed")
+    dispatch(SavingPDFStart("PDF Saving Failed"));
+  }
 };
 
 export const GetTotalStatement = () => {
@@ -112,11 +142,11 @@ export const GetUserSpeicificStatement = (name,navigate) => {
       .then(async (response) => {
         const {version,pdf_name}=response
         await dispatch(GetSpecificStatementSuccess(response));
-        if(version==="A"){
-          navigate(`/pdf/Version-A?${pdf_name}`)
-        }else{
-          navigate(`/pdf/Version-B?${pdf_name}`)
-        }
+        // if(version==="A"){
+        //   navigate(`/pdf/Version-A?${pdf_name}`)
+        // }else{
+        //   navigate(`/pdf/Version-B?${pdf_name}`)
+        // }
       })
       .catch((error) => {
         toast.error("Get Statement Failed")

@@ -1,18 +1,17 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import "./Core.css";
+import { toast } from "react-toastify";
 
 const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-      intialState.core_competencies_image=e.target.result;
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
+  const handleImageUpload = (e) => {
+    const file_current = e.target.files[0];
+    if (file_current.size > 1024000) {
+      toast.error("File size cannot exceed more than 1MB" );
+    } else {
+       handleOnChange({
+      target: { name: "core_competencies_image", value:file_current  },
+    });
     }
   };
 
@@ -41,7 +40,7 @@ const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
           <h1 className="core_h">Core Competencies</h1>
           {isEditMode ? (
             <div>
-              {intialState.core_competencies.split("=").map((item, index) => (
+              {intialState.core_competencies?.split("=").map((item, index) => (
                 <div key={index}>
                   <Form.Control
                     type="text"
@@ -55,7 +54,7 @@ const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
             </div>
           ) : (
             <ul className="core-list">
-              {intialState.core_competencies.split("=").map((item, index) => (
+              {intialState.core_competencies?.split("=").map((item, index) => (
                 <li key={index}>{item}</li>
               ))}
             </ul>
@@ -67,7 +66,7 @@ const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
             <div className="edit-core">
               <div className="edit_core_info">
                 <Form.Label>Core Competencies Info</Form.Label>
-                {intialState.core_competencies_info.split("=").map((item, index) => (
+                {intialState.core_competencies_info?.split("=").map((item, index) => (
                   <div key={index}>
                     <Form.Control
                       type="text"
@@ -82,7 +81,7 @@ const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
             </div>
           ) : (
             <div>
-              {intialState.core_competencies_info.split("=").map((item, index) => (
+              {intialState.core_competencies_info?.split("=").map((item, index) => (
                 <p key={index}>{item}</p>
               ))}
             </div>
