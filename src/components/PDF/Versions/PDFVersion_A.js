@@ -106,23 +106,22 @@ const PDFVersion_A = () => {
 
     dispatch(SaveCapabilityStatement(intialState, setIsEditMode, setShowPopup))
 
-    // Show only the content within the PDF div
-    // const pdfContainer = document.getElementById("pdfContainer");
-    // const originalDisplayStyle = pdfContainer.style.display;
-    // pdfContainer.style.display = "flex";
-
-    // Print the content
-    // window.print();
-
-    // Restore the original display style
-    //pdfContainer.style.display = originalDisplayStyle;
+    
   };
 
+  const handlePrint = (e) => {
+    e.preventDefault();
+ //Show only the content within the PDF div
+   const pdfContainer = document.getElementById("pdfContainer");
+   const originalDisplayStyle = pdfContainer.style.display;
+   pdfContainer.style.display = "flex";
 
-  // const handlePrint = (e) => {
-  //   e.preventDefault();
+   // Print the content
+    window.print();
 
-  // };
+   // Restore the original display style
+   pdfContainer.style.display = originalDisplayStyle;
+  };
 
   const handleClose = () => {
     setShowPopup(false); // Close the pop-up
@@ -176,6 +175,9 @@ const PDFVersion_A = () => {
       <Button variant="primary" size="lg" onClick={handlePopup}>
         Save
       </Button>
+       <Button variant="primary" size="lg" onClick={handlePrint}>
+            Print
+          </Button>
 
       {/* Modal for PDF Name and Print */}
       <Modal show={showPopup} onHide={handleClose}>
@@ -195,9 +197,7 @@ const PDFVersion_A = () => {
           <Button variant="secondary" size="lg" onClick={handleClose}>
             Close
           </Button>
-          {/* <Button variant="primary" size="lg" onClick={handlePrint}>
-            Print
-          </Button> */}
+         
           <Button disabled={Data.loading} variant="primary" size="lg" onClick={handleSave}>
             Save
           </Button>
