@@ -48,14 +48,14 @@ const PDFVersion_B = () => {
   const [pdfName, setPdfName] = useState("");
 
 
-  useEffect(() => {
-    if (queryParamValue) {
-      dispatch(GetUserSpeicificStatement(queryParamValue, navigate))
-      setIntialState({
-        ...intialState,pdf
-      })
-    }
-  }, [queryParamValue]);
+  // useEffect(() => {
+  //   if (queryParamValue) {
+  //     dispatch(GetUserSpeicificStatement(queryParamValue, navigate))
+  //     setIntialState({
+  //       ...intialState,pdf
+  //     })
+  //   }
+  // }, [queryParamValue]);
   useEffect(() => {
     setIntialState(
     {

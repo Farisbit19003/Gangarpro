@@ -3,7 +3,7 @@ import axios from 'axios';
 import { api } from "../../../utils/constants/api";
 import { isEmpty, toastSuccess } from "../../../utils/helpers/helper";
 import { CapabilityStatement, DeleteUserStatement, GetSpecificStatement, TotalStatement } from "../../../utils/requests/pdf";
-import { PDFSAVING_SUCCESS, PDFSAVING_START, PDFSAVING_FAILED, GetTotalStatement_FAILED, GetTotalStatement_SUCCESS, GetSpecificStatement_SUCCESS, GetSpecificStatement_FAILED } from "../../actionTypes";
+import { PDFSAVING_SUCCESS,DELETESTATEMENT_START,DELETESTATEMENT_FAILED,RESET_STATE ,PDFSAVING_START, PDFSAVING_FAILED, GetTotalStatement_FAILED, GetTotalStatement_SUCCESS, GetSpecificStatement_SUCCESS, GetSpecificStatement_FAILED, GetSpecificStatement_START } from "../../actionTypes";
 
 export const SavingPDFStart = () => {
   return {
@@ -30,11 +30,15 @@ export const GetTotalStatementSuccess = (data) => {
     data,
   };
 };
-
-export const GetSpecificStatementFailed = (Error) => {
+export const GetTotalStatementFailed = (Error) => {
   return {
     type: GetTotalStatement_FAILED,
     Error,
+  };
+};
+export const GetSpecificStatementStart = () => {
+  return {
+    type: GetSpecificStatement_START,
   };
 };
 
@@ -44,13 +48,31 @@ export const GetSpecificStatementSuccess = (data) => {
     data,
   };
 };
-
-export const GetTotalStatementFailed = (Error) => {
+export const GetSpecificStatementFailed = (Error) => {
   return {
     type: GetSpecificStatement_FAILED,
     Error,
   };
 };
+
+export const DeleteStatementSTART = () => {
+  return {
+    type: DELETESTATEMENT_START,
+  };
+};
+
+export const DeleteStatementFAILED = (Error) => {
+  return {
+    type: DELETESTATEMENT_FAILED,
+    Error
+  };
+};
+export const ResetState= () => {
+  return {
+    type: RESET_STATE,
+  };
+};
+
 
 export const SaveCapabilityStatement= (formData,setIsEditMode,setShowPopup) => async (dispatch, getState) => {
   try {
@@ -115,42 +137,56 @@ export const GetTotalStatement = () => {
       });
   };
 };
-export const DeleteStatement = (name,setShowPopup) => {
+export const DeleteStatement = (name,setShowPopup,setOk,setVersion) => {
   let user =JSON.parse(localStorage.getItem("user"));
     if (!user) {
       return toast.error("Please Login")
     }
+   
   return async (dispatch) => {
+    dispatch(DeleteStatementSTART())
     return DeleteUserStatement(user.id,name)
       .then(async (response) => {
         await dispatch(GetTotalStatement());
+        dispatch(ResetState())
+        setOk(false);
+        setVersion("");
         toast.success("Statement Deleted")
         setShowPopup(false)
       })
       .catch((error) => {
         toast.error("Statement Deleted Failed")
+        dispatch(DeleteStatementFAILED("Statement Failed"))
       });
   };
 };
-export const GetUserSpeicificStatement = (name,navigate) => {
+export const GetUserSpeicificStatement = (name,navigate,setVersion) => {
   let user =JSON.parse(localStorage.getItem("user"));
     if (!user) {
       return toast.error("Please Login")
     }
   return async (dispatch) => {
+    dispatch(GetSpecificStatementStart());
     return GetSpecificStatement(user.id,name)
       .then(async (response) => {
-        const {version,pdf_name}=response
+        const {version,pdf_name,error}=response
+        if(error){
+          // toast.error(error)
+          dispatch(GetSpecificStatementFailed("Get Statement Failed"));
+          return
+        }
         await dispatch(GetSpecificStatementSuccess(response));
-        // if(version==="A"){
-        //   navigate(`/pdf/Version-A?${pdf_name}`)
-        // }else{
-        //   navigate(`/pdf/Version-B?${pdf_name}`)
-        // }
+        if(version==="A"){
+           setVersion("A")
+          navigate(`/pdf?${pdf_name}`)
+        }else{
+          setVersion("B")
+          navigate(`/pdf?${pdf_name}`)
+        }
       })
       .catch((error) => {
         toast.error("Get Statement Failed")
-        dispatch(GetSpecificStatement_FAILED("Get Statement Failed"));
+        dispatch(GetSpecificStatementFailed("Get Statement Failed"));
       });
   };
 };

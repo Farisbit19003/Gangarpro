@@ -46,12 +46,7 @@ const PDFVersion_A = () => {
   const [showPopup, setShowPopup] = useState(false); // State to control the pop-up
 
 
-  useEffect(() => {
-    if (queryParamValue) {
-      dispatch(GetUserSpeicificStatement(queryParamValue, navigate))
-      console.log(pdf)
-    }
-  }, [queryParamValue]);
+
 
   useEffect(() => {
     setIntialState(
