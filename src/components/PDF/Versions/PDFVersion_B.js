@@ -180,13 +180,15 @@ const PDFVersion_B = () => {
         </div>
       </div>
 
+     
+      <div className="s-p">
       <Button variant="primary" size="lg" onClick={handlePopup}>
         Save
       </Button>
-
-       <Button variant="primary" size="lg" onClick={handlePrint}>
-            Print
-          </Button>
+      <Button variant="primary" size="lg" onClick={handlePrint}>
+        Print
+      </Button>
+      </div>
 
       {/* Modal for PDF Name and Print */}
       <Modal show={showPopup} onHide={handleClose}>

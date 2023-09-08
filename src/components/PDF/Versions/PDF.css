@@ -62,3 +62,11 @@
   gap:2rem;
   border: 1px solid red;
 }
+.s-p{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 1rem;
+  justify-content: start;
+  align-items: center;
+}

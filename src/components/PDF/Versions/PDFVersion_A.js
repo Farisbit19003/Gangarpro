@@ -134,12 +134,20 @@ const PDFVersion_A = () => {
           borderColor={borderColor}
           onBorderColorChange={handleBorderColorChange}
         />
-        {!isEditMode && <div className="edit-button" onClick={handleEditClick}>
-          <FaEdit size={20} />
-        </div>}
-        {isEditMode && <Button variant="danger" size="lg" onClick={() => setIsEditMode(false)}>
-          Cancel
-        </Button>}
+        {!isEditMode && (
+          <div className="edit-button" onClick={handleEditClick}>
+            <FaEdit size={20} />
+          </div>
+        )}
+        {isEditMode && (
+          <Button
+            variant="danger"
+            size="lg"
+            onClick={() => setIsEditMode(false)}
+          >
+            Cancel
+          </Button>
+        )}
       </div>
       <div id="pdfContainer" className="PDF" style={{ borderColor }}>
         <div className="PDF_main">
@@ -172,12 +180,14 @@ const PDFVersion_A = () => {
         </div>
       </div>
 
+      <div className="s-p">
       <Button variant="primary" size="lg" onClick={handlePopup}>
         Save
       </Button>
-       <Button variant="primary" size="lg" onClick={handlePrint}>
-            Print
-          </Button>
+      <Button variant="primary" size="lg" onClick={handlePrint}>
+        Print
+      </Button>
+      </div>
 
       {/* Modal for PDF Name and Print */}
       <Modal show={showPopup} onHide={handleClose}>
@@ -197,8 +207,13 @@ const PDFVersion_A = () => {
           <Button variant="secondary" size="lg" onClick={handleClose}>
             Close
           </Button>
-         
-          <Button disabled={Data.loading} variant="primary" size="lg" onClick={handleSave}>
+
+          <Button
+            disabled={Data.loading}
+            variant="primary"
+            size="lg"
+            onClick={handleSave}
+          >
             Save
           </Button>
         </Modal.Footer>
