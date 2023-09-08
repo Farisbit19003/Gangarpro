@@ -8,7 +8,7 @@ const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
     const reader = new FileReader();
 
     reader.onload = (e) => {
-      intialState.core_competencies_image(e.target.result);
+      intialState.core_competencies_image=e.target.result;
     };
 
     if (file) {

@@ -96,7 +96,6 @@ const PDFVersion_A = () => {
     setShowPopup(true); // Show the pop-up
   };
   const handleSave = (e) => {
-   
     // Check if any field is empty
     const isEmptyField = Object.values(intialState).some((value) => value === "");
 

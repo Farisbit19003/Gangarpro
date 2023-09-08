@@ -8,7 +8,7 @@ const Past = ({ isEditMode, intialState, handleOnChange }) => {
     const reader = new FileReader();
 
     reader.onload = (e) => {
-      intialState.past_performance_image(e.target.result);
+      intialState.past_performance_image=e.target.result;
     };
 
     if (file) {
