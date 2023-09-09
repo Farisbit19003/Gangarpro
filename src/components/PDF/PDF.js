@@ -64,6 +64,7 @@ const PDF = () => {
   }, [queryParamValue]);
   return (
     <>
+    <div  style={{ overflow: 'auto' }}>
       {ok && version === "" ? (
        <>
         <h1 id="nb" className="text-center mt-5">CHOOSE YOUR VERSION</h1>
@@ -176,6 +177,7 @@ const PDF = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      </div>
     </>
   );
 };

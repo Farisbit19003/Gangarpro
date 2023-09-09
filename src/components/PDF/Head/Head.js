@@ -19,7 +19,7 @@ const Head = ({ isEditMode, intialState, handleOnChange,Logo_Url}) => {
           {isEditMode ? (
             <>
               <Form.Control
-                className="edit"
+                className="edit_info"
                 type="text"
                 placeholder="compony info"
                 name="company_info"
@@ -27,7 +27,7 @@ const Head = ({ isEditMode, intialState, handleOnChange,Logo_Url}) => {
                 onChange={handleOnChange}
               />
               <Form.Control
-                className="edit"
+                className="edit_info"
                 type="text"
                 name="company_address1"
                 placeholder="company address 1"
@@ -35,7 +35,7 @@ const Head = ({ isEditMode, intialState, handleOnChange,Logo_Url}) => {
                 onChange={handleOnChange}
               />
               <Form.Control
-                className="edit"
+                className="edit_info"
                 type="text"
                 placeholder="companyAddress2"
                 name="company_address2"
@@ -43,28 +43,28 @@ const Head = ({ isEditMode, intialState, handleOnChange,Logo_Url}) => {
                 onChange={handleOnChange}
               />
               <Form.Control
-                className="edit"
+                className="edit_info"
                 type="text"
                 name="owner_name"
                 value={intialState.owner_name}
                 onChange={handleOnChange}
               />
               <Form.Control
-                className="edit"
+                className="edit_info"
                 type="text"
                 name="owner_phone"
                 value={intialState.owner_phone}
                 onChange={handleOnChange}
               />
               <Form.Control
-                className="edit"
+                className="edit_info"
                 type="text"
                 name="owner_email"
                 value={intialState.owner_email}
                 onChange={handleOnChange}
               />
               <Form.Control
-                className="edit"
+                className="edit_info"
                 type="text"
                 name="url"
                 value={intialState.url}

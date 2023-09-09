@@ -31,12 +31,13 @@
     font-size: medium;
     font-weight: 700;
     text-align: end;
-
+    width: fit-content;
 }
-.edit{
+.edit_info{
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    width: fit-content;
 }
 .line {
     border: 1px solid black;

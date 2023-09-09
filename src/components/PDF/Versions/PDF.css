@@ -10,17 +10,23 @@
 .PDF_main {
   border: 2px solid;
   font-size: medium;
-  width: 850px;
-  padding: 1rem;
-  overflow-x: auto; 
+  width: 100%;
+  padding: 1rem; 
 }
 
-@media screen and (max-width: 1200px) {
+/* @media screen and (max-width: 1200px) {
   .PDF_main {
+    font-size: small;
     padding: 1rem;
-    width: 100%; /* Make it take the full width of the screen */
+    width: ;
+ 
   }
-}
+  .SALMAN{
+    width: 100%;
+    
+} 
+}*/
+
 
 
 .edit-button {

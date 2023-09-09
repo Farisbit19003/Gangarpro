@@ -33,6 +33,7 @@ const Past = ({ isEditMode, intialState, handleOnChange }) => {
   };
 
   return (
+    <>
     <div className="past">
       <div className="past_img">
         {isEditMode ? (
@@ -114,6 +115,8 @@ const Past = ({ isEditMode, intialState, handleOnChange }) => {
         )}
       </div>
     </div>
+   
+    </>
   );
 };
 
