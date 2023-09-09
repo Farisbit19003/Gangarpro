@@ -13,17 +13,37 @@ import { toast } from "react-toastify";
 import { GetUserSpeicificStatement, SaveCapabilityStatement } from "../../../store/actions/PDF/pdf.actions";
 import { useLocation, useNavigate } from 'react-router-dom';
 import generatePDF, { Resolution, Margin } from 'react-to-pdf';
+import { useRef } from "react";
+import { throttle } from "lodash";
 
 const PDFVersion_A = () => {
   const Data = useSelector((state) => state.pdf);
   const [loading,setLoading]=useState(false)
+
   const pdf = Data.values
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate()
   const queryString = location?.search; // This will be "?Salman.pdf"
   const queryParamValue = queryString.slice(1);
+  const [InitialWidth, setInitialWidth]=useState(false)
 
+  const pdfWrapper = useRef(null);
+
+  const setPdfSize = () => {
+    if (pdfWrapper && pdfWrapper.current) {
+      setInitialWidth(pdfWrapper.current.getBoundingClientRect().width);
+    }
+    console.log(InitialWidth);
+  };
+  
+  useEffect(() => {
+    window.addEventListener('resize', throttle(setPdfSize, 5000));
+    setPdfSize();
+    return () => {
+      window.removeEventListener('resize', throttle(setPdfSize, 5000));
+    };
+  }, []);
   const [intialState, setIntialState] = useState({
     userId: 2,
     version: "A",
@@ -127,14 +147,10 @@ const PDFVersion_A = () => {
   };
 
   const options = {
-    
     page: {
        // margin is in MM, default is Margin.NONE = 0
        margin: Margin.SMALL,
-       // default is 'A4'
-       format: 'letter',
-       // default is 'portrait
-       
+       // default is 'A4'     
     },
     canvas: {
        // default is 'image/jpeg' for better size performance
@@ -158,7 +174,7 @@ const PDFVersion_A = () => {
 
  const generatepdf=()=>{
   setLoading(true)
-  generatePDF(getTargetElement,options).then((response)=>{
+  generatePDF(pdfWrapper,options).then((response)=>{
    console.log(response);
    setLoading(false)
   }).catch(()=>{
@@ -188,7 +204,7 @@ const PDFVersion_A = () => {
         )}
       </div>
       <div >
-      <div id="pdf" className="PDF" >
+      <div id="pdf" ref={pdfWrapper} style={{width:InitialWidth}} className="PDF" >
         <div className="PDF_main"  style={{ borderColor }}>
           <Head
             handleOnChange={handleOnChange}

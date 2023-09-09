@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./PDF.css";
 import Head from "../Head/Head";
 import About from "../About/About";
@@ -12,7 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { GetUserSpeicificStatement, SaveCapabilityStatement } from "../../../store/actions/PDF/pdf.actions";
 import { useLocation, useNavigate } from 'react-router-dom';
-import generatePDF, { Resolution, Margin } from 'react-to-pdf';
+import generatePDF, { Resolution,Margin } from 'react-to-pdf';
+import { throttle } from "lodash";
 
 
 const PDFVersion_B = () => {
@@ -25,6 +26,24 @@ const PDFVersion_B = () => {
   const queryString = location?.search; // This will be "?Salman.pdf"
   // Remove the leading "?" character
   const queryParamValue = queryString.slice(1);
+  const [InitialWidth, setInitialWidth]=useState(false)
+
+  const pdfWrapper = useRef(null);
+
+  const setPdfSize = () => {
+    if (pdfWrapper && pdfWrapper.current) {
+      setInitialWidth(pdfWrapper.current.getBoundingClientRect().width);
+    }
+    console.log(InitialWidth);
+  };
+  
+  useEffect(() => {
+    window.addEventListener('resize', throttle(setPdfSize, 5000));
+    setPdfSize();
+    return () => {
+      window.removeEventListener('resize', throttle(setPdfSize, 5000));
+    };
+  }, []);
   const [intialState, setIntialState] = useState({
     userId: 2,
     version:"B",
@@ -124,9 +143,8 @@ const PDFVersion_B = () => {
     
     page: {
        // margin is in MM, default is Margin.NONE = 0
-       margin: Margin.SMALL,
+       margin:Margin.SMALL,
        // default is 'A4'
-       format: 'letter',
        // default is 'portrait
        
     },
@@ -152,7 +170,7 @@ const PDFVersion_B = () => {
 
  const generatepdf=()=>{
   setLoading(true)
-  generatePDF(getTargetElement,options).then((response)=>{
+  generatePDF(pdfWrapper,options).then((response)=>{
    console.log(response);
    setLoading(false)
   }).catch(()=>{
@@ -193,8 +211,8 @@ const PDFVersion_B = () => {
           Cancel
         </Button>}
       </div>
-      <div id="pdf" className="PDF" >
-        <div className="PDF_main" style={{ borderColor }}>
+      <div id="pdfContainer" ref={pdfWrapper} className="PDF" >
+        <div id="pdf"  className="PDF_main" style={{width:InitialWidth, borderColor }}>
           <Head
             handleOnChange={handleOnChange}
             intialState={intialState}
