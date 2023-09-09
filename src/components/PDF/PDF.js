@@ -65,7 +65,10 @@ const PDF = () => {
   return (
     <>
       {ok && version === "" ? (
-        <div className="version">
+       <>
+        <h1 className="text-center mt-5">CHOOSE YOUR VERSION</h1>
+        <div id="nb" className="version">
+          
           <Link className="link" onClick={() => handleVersion("A")}>
             <div className="v_box">
               <img
@@ -84,11 +87,11 @@ const PDF = () => {
               />
             </div>
           </Link>
-        </div>
+        </div></>
       ) : (
         <>
           <div className="in_row">
-            <div id="#nb" className="CCP_List">
+            <div id="nb" className="CCP_List">
               <h1 className="head">CCP PDFS</h1>
               {pdfs?.map((p) => {
                 return (
@@ -130,20 +133,25 @@ const PDF = () => {
                 </Button>
               )}
             </div>
-            <div className="ttp">
+
             {version === "A" ? (
-              <PDFVersion_A />
+              <div  className="ttp">
+                
+                <PDFVersion_A />
+              </div>
             ) : version === "B" ? (
-              <PDFVersion_B />
+              <div  className="ttp">
+                {" "}
+                <PDFVersion_B />{" "}
+              </div>
             ) : (
-              ""
+              <div id="nb"></div>
             )}
-            </div>
           </div>
         </>
       )}
 
-      <Modal show={showPopup} onHide={() => setShowPopup(false)}>
+      <Modal id="nb" show={showPopup} onHide={() => setShowPopup(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Are you Sure You want to Delete?</Modal.Title>
         </Modal.Header>

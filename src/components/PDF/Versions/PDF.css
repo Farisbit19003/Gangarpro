@@ -3,17 +3,26 @@
   margin: 15px 15px;
   font-family: Arial, sans-serif;
   display: flex;
-  
   justify-content: center;
   align-items: center;
 }
 
 .PDF_main {
-  border: 2px solid ;
+  border: 2px solid;
   font-size: medium;
   width: 850px;
-  padding: 2rem;
+  padding: 1rem;
+  overflow-x: auto; /* Add horizontal overflow with auto-scrolling */
 }
+
+@media screen and (max-width: 850px) {
+  .PDF_main {
+    padding: 1rem;
+    width: 100%; /* Make it take the full width of the screen */
+  }
+  
+}
+
 
 .edit-button {
   width: fit-content;
@@ -71,6 +80,6 @@
   flex-direction: row;
   gap: 1rem;
   margin: 1rem;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
 }

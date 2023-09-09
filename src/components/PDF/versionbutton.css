@@ -4,7 +4,18 @@
     align-items: center;
     flex-direction: row !important;
     gap: 1rem;
-    height: calc(100vh - 150px);
+   /* height: calc(100vh - 150px); */
+}
+@media screen and (max-width: 768px) {
+    .version {
+        display: flex;
+        flex-direction: column !important; 
+        gap: 1px !important;/* Change to a column layout */
+    }
+    .v_pic{
+        height: 180px !important;
+        width: fit-content;
+    }
 }
 .CCP_List{
     display: flex;
@@ -15,9 +26,19 @@
 .in_row{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    
+}
+@media screen and (max-width: 1024px) {
+    .in_row {
+        flex-direction: column; /* Change to a vertical layout */
+        align-items: flex-start; /* Align items to the start of the container */
+    }
 }
 .ttp{
-    width: 75%;
+    padding: 1rem;
+    width: 100%;
+    border-left: 1px dashed #D8D8D8;
 }
 .pdf_list{
     display: flex;
@@ -46,18 +67,16 @@
 }
 
 .v_pic{
-    height: 400px;
+    max-height: 400px;
     width: fit-content;
 }
 .v_box {
-   
+   margin-top: 2.5rem;
     padding: 1rem;
     color: black;
     font-size: x-large;
     background-color: white;
     border: 2px solid #D8D8D8;
-
-
 }
 
 .v_box:hover {
