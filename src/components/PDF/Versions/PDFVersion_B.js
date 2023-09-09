@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { GetUserSpeicificStatement, SaveCapabilityStatement } from "../../../store/actions/PDF/pdf.actions";
 import { useLocation, useNavigate } from 'react-router-dom';
+import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 
 
 const PDFVersion_B = () => {
@@ -20,6 +21,7 @@ const PDFVersion_B = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate()
+  const [loading,setLoading]=useState(false)
   const queryString = location?.search; // This will be "?Salman.pdf"
   // Remove the leading "?" character
   const queryParamValue = queryString.slice(1);
@@ -118,7 +120,45 @@ const PDFVersion_B = () => {
    
   };
 
+  const options = {
+    
+    page: {
+       // margin is in MM, default is Margin.NONE = 0
+       margin: Margin.SMALL,
+       // default is 'A4'
+       format: 'letter',
+       // default is 'portrait
+       
+    },
+    canvas: {
+       // default is 'image/jpeg' for better size performance
+       qualityRatio: 1
+    },
+ 
+    overrides: {
+       // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
+       pdf: {
+          compress: true
+       },
+       // see https://html2canvas.hertzen.com/configuration for more options
+       canvas: {
+          useCORS: true
+       }
+    },
+ };
+ 
+ // you can use a function to return the target element besides using React refs
+ const getTargetElement = () => document.getElementById('pdf');
 
+ const generatepdf=()=>{
+  setLoading(true)
+  generatePDF(getTargetElement,options).then((response)=>{
+   console.log(response);
+   setLoading(false)
+  }).catch(()=>{
+
+  })
+ }
   const handlePrint = (e) => {
     e.preventDefault();
  //Show only the content within the PDF div
@@ -153,7 +193,7 @@ const PDFVersion_B = () => {
           Cancel
         </Button>}
       </div>
-      <div id="pdfContainer" className="PDF" >
+      <div id="pdf" className="PDF" >
         <div className="PDF_main" style={{ borderColor }}>
           <Head
             handleOnChange={handleOnChange}
@@ -195,8 +235,8 @@ const PDFVersion_B = () => {
       <Button variant="primary" size="lg" onClick={handlePopup}>
         Save
       </Button>
-      <Button variant="primary" size="lg" onClick={handlePrint}>
-        Print
+      <Button disabled={loading} variant="primary" size="lg" onClick={generatepdf}>
+        Generate Pdf
       </Button>
       </div>
 
