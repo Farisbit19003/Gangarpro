@@ -67,9 +67,10 @@ export const DeleteStatementFAILED = (Error) => {
     Error
   };
 };
-export const ResetState= () => {
+export const ResetState= (v) => {
   return {
     type: RESET_STATE,
+    v
   };
 };
 

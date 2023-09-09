@@ -97,7 +97,7 @@ const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
           )}
         </div>
 
-        {page !== "VersionB" && (
+        {page !== "VersionA" && (
           <div className="core_img">
             {isEditMode ? (
              <>

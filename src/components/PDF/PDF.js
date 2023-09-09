@@ -53,7 +53,7 @@ const PDF = () => {
 
   const handleVersion = (v) => {
     setVersion(v);
-    dispatch(ResetState());
+    dispatch(ResetState(v));
   };
   useEffect(() => {
     if (queryParamValue) {
@@ -146,7 +146,7 @@ const PDF = () => {
                 <PDFVersion_B />{" "}
               </div>
             ) : (
-              <div id="nb"></div>
+              <div id="nb">dhvhdcgvd</div>
             )}
           </div>
         </>

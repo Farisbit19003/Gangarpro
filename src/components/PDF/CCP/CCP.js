@@ -6,7 +6,7 @@ const CCP = ({ isEditMode, intialState, handleOnChange,page }) => {
   return (
     <div className="ccp">
 
-      <h1 className="ccp_h">{page==="VersionB"?"DIFFERENTIATORS":"What’s the CCP difference?"}</h1>
+      <h1 className="ccp_h">DIFFERENTIATORS</h1>
 
       {isEditMode ? (
         <Form.Control

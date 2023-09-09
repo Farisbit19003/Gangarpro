@@ -39,16 +39,43 @@ let obj={
   difference:
     "We have been awarded contracts in over 41 cities. We have 9 managers and offices located around the USA that can supervise our local labor and equipment. CCP can get a site visit to confirm scope and pricing within 48 hours notice anywhere in the USA. We will always mobilize within an hour of your job site.",
 }
+let objB={
+  id: "",
+  pdf_name: "",
+  logo_url: "",
+  version: "",
+  company_info: "Faris",
+  company_address1: "715 Peachtree St, Ste 100",
+  company_address2: "Atlanta, GA 30308",
+  owner_name: "Aduvie Okoh",
+  owner_email: "aduvie@final‐clean.com",
+  owner_phone: "(202) 544-1353",
+  url: "https://final‐clean.com/",
+  about_us:
+    "Construction Clean Partners works with commercial general contractors as a subcontractor completing the post construction final clean scope. We estimate cleaning bids via the plans and physical site visit walk throughs. CCP mobilizes employee labor and equipment to new construction and renovation commercial projects to help clean interior building sites.",
+  core_competencies:
+    "Interior post construction cleanup=Pressure washing=Window washing=Covid disinfection and sanitation",
+  core_competencies_image:
+    "https://res.cloudinary.com/die5mkbau/image/upload/v1694085238/ccp-logo_wryb63.png",
+  core_competencies_info:
+    "Scope – Final clean = NAICS – 561720 = DUNS – 067345638",
+  past_performance:
+    "Canaan Crossing=Woda Cooper Companies=Allora At the Exchange=CORE Construction=Intrada Westside=JM Wilkerson=Harris County Carver Middle School=Freeman & Associates",
+  past_performance_image:
+    "https://res.cloudinary.com/die5mkbau/image/upload/v1694085238/ccp-logo_wryb63.png",
+  difference:
+    "We have been awarded contracts in over 41 cities. We have 9 managers and offices located around the USA that can supervise our local labor and equipment. CCP can get a site visit to confirm scope and pricing within 48 hours notice anywhere in the USA. We will always mobilize within an hour of your job site.",
+}
 const initialState = {
   error: null,
   loading: false,
   pdfs: [],
-  values:obj
+  values:""
 };
 
-const ResetState = (state) => {
+const ResetState = (state,action) => {
   return updateObject(state, {
-    values:obj,
+    values:action.v==="A"?obj:action.v==="B"?objB:"",
     loading:false
   });
 };
@@ -132,7 +159,7 @@ export const pdfReducer = (state = initialState, action) => {
     case GetSpecificStatement_FAILED:
       return GetSpecificStatementFail(state, action);
       case RESET_STATE:
-      return ResetState(state);
+      return ResetState(state,action);
       case DELETESTATEMENT_START:
       return DeletePDFStart(state);
       case DELETESTATEMENT_FAILED:

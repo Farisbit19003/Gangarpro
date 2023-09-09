@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./PDF.css";
 import Head from "../Head/Head";
 import About from "../About/About";
@@ -12,19 +12,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { GetUserSpeicificStatement, SaveCapabilityStatement } from "../../../store/actions/PDF/pdf.actions";
 import { useLocation, useNavigate } from 'react-router-dom';
-import generatePDF, { Resolution, Margin } from 'react-to-pdf';
-import { useRef } from "react";
+import generatePDF, { Resolution,Margin } from 'react-to-pdf';
 import { throttle } from "lodash";
+
 
 const PDFVersion_A = () => {
   const Data = useSelector((state) => state.pdf);
-  const [loading,setLoading]=useState(false)
-
-  const pdf = Data.values
+  const pdf=Data.values
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate()
+  const [loading,setLoading]=useState(false)
   const queryString = location?.search; // This will be "?Salman.pdf"
+  // Remove the leading "?" character
   const queryParamValue = queryString.slice(1);
   const [InitialWidth, setInitialWidth]=useState(false)
 
@@ -46,7 +46,7 @@ const PDFVersion_A = () => {
   }, []);
   const [intialState, setIntialState] = useState({
     userId: 2,
-    version: "A",
+    version:"B",
     pdf_name: pdf?.pdf_name,
     company_info: pdf.company_info,
     company_address1: pdf.company_address1,
@@ -57,7 +57,6 @@ const PDFVersion_A = () => {
     url: pdf.url,
     about_us: pdf.about_us,
     core_competencies: pdf.core_competencies,
-    core_competencies_image: pdf.core_competencies_image,
     core_competencies_info: pdf.core_competencies_info,
     past_performance: pdf.past_performance,
     past_performance_image: pdf.past_performance_image,
@@ -66,14 +65,23 @@ const PDFVersion_A = () => {
   const [borderColor, setBorderColor] = useState("black");
   const [isEditMode, setIsEditMode] = useState(false);
   const [showPopup, setShowPopup] = useState(false); // State to control the pop-up
+  const [logoUrl, setLogoUrl] = useState("");
+  const [pdfName, setPdfName] = useState("");
 
 
-
+  // useEffect(() => {
+  //   if (queryParamValue) {
+  //     dispatch(GetUserSpeicificStatement(queryParamValue, navigate))
+  //     setIntialState({
+  //       ...intialState,pdf
+  //     })
+  //   }
+  // }, [queryParamValue]);
   useEffect(() => {
     setIntialState(
     {
     userId: 2,
-    version: "A",
+    version: "B",
     pdf_name: pdf?.pdf_name,
     company_info: pdf.company_info,
     company_address1: pdf.company_address1,
@@ -92,12 +100,12 @@ const PDFVersion_A = () => {
   }
     );
   }, [pdf]);
+
   const handleOnChange = (e) => {
 
     setIntialState({
       ...intialState, [e.target.name]: e.target.value
     });
-    console.log(intialState);
   };
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -112,7 +120,6 @@ const PDFVersion_A = () => {
     setShowPopup(true); // Show the pop-up
   };
   const handleSave = (e) => {
-  
     let formData=new FormData();
     for (const key in intialState) {
       if (intialState[key] !== undefined) {
@@ -121,36 +128,25 @@ const PDFVersion_A = () => {
     }
     // Check if any field is empty
     const isEmptyField = Object.values(intialState).some((value) => value === "");
+
     if (isEmptyField) {
       toast.error("Please fill in all fields before submitting.");
       return;
     }
-    dispatch(SaveCapabilityStatement(formData,setIsEditMode, setShowPopup))
-  };
 
-  const handlePrint = (e) => {
-    e.preventDefault();
- //Show only the content within the PDF div
-   const pdfContainer = document.getElementById("pdfContainer");
-   const originalDisplayStyle = pdfContainer.style.display;
-   pdfContainer.style.display = "flex";
+    dispatch(SaveCapabilityStatement(formData, setIsEditMode, setShowPopup))
 
-   // Print the content
-    window.print();
-
-   // Restore the original display style
-   pdfContainer.style.display = originalDisplayStyle;
-  };
-
-  const handleClose = () => {
-    setShowPopup(false); // Close the pop-up
+   
   };
 
   const options = {
+    
     page: {
        // margin is in MM, default is Margin.NONE = 0
-       margin: Margin.SMALL,
-       // default is 'A4'     
+       margin:Margin.SMALL,
+       // default is 'A4'
+       // default is 'portrait
+       
     },
     canvas: {
        // default is 'image/jpeg' for better size performance
@@ -160,7 +156,7 @@ const PDFVersion_A = () => {
     overrides: {
        // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
        pdf: {
-          compress: true
+          compress: true,
        },
        // see https://html2canvas.hertzen.com/configuration for more options
        canvas: {
@@ -181,6 +177,26 @@ const PDFVersion_A = () => {
 
   })
  }
+  const handlePrint = (e) => {
+    e.preventDefault();
+ //Show only the content within the PDF div
+   const pdfContainer = document.getElementById("pdfContainer");
+   const originalDisplayStyle = pdfContainer.style.display;
+   pdfContainer.style.display = "flex";
+
+   // Print the content
+    window.print();
+
+   // Restore the original display style
+   pdfContainer.style.display = originalDisplayStyle;
+  };
+
+  
+
+  const handleClose = () => {
+    setShowPopup(false); // Close the pop-up
+  };
+
   return (
     <>
       <div id="nb" className="edit">
@@ -188,24 +204,15 @@ const PDFVersion_A = () => {
           borderColor={borderColor}
           onBorderColorChange={handleBorderColorChange}
         />
-        {!isEditMode && (
-          <div className="edit-button" onClick={handleEditClick}>
-            <FaEdit size={20}/>
-          </div>
-        )}
-        {isEditMode && (
-          <Button
-            variant="danger"
-            size="lg"
-            onClick={() => setIsEditMode(false)}
-          >
-            Cancel
-          </Button>
-        )}
+        {!isEditMode && <div className="edit-button" onClick={handleEditClick}>
+          <FaEdit size={20} />
+        </div>}
+        {isEditMode && <Button variant="danger" size="lg" onClick={() => setIsEditMode(false)}>
+          Cancel
+        </Button>}
       </div>
-      <div >
-      <div id="pdf" ref={pdfWrapper} style={{width:InitialWidth}} className="PDF" >
-        <div className="PDF_main"  style={{ borderColor }}>
+      <div id="pdfContainer" ref={pdfWrapper} className="PDF" >
+        <div id="pdf"  className="PDF_main" style={{width:InitialWidth, borderColor }}>
           <Head
             handleOnChange={handleOnChange}
             intialState={intialState}
@@ -218,27 +225,30 @@ const PDFVersion_A = () => {
             intialState={intialState}
             isEditMode={isEditMode}
           />
-           <br/>
+          <br/>
           <Core
             handleOnChange={handleOnChange}
             intialState={intialState}
             isEditMode={isEditMode}
+            page="VersionA"
           />
-           <br/>
+          <br/>
           <Past
             handleOnChange={handleOnChange}
             intialState={intialState}
             isEditMode={isEditMode}
           />
-           <br/>
+          <br/>
           <CCP
             handleOnChange={handleOnChange}
             intialState={intialState}
             isEditMode={isEditMode}
+            page="VersionA"
           />
         </div>
       </div>
-      </div>
+
+     
       <div className="s-p" id="nb">
       <Button variant="primary" size="lg" onClick={handlePopup}>
         Save
@@ -266,13 +276,8 @@ const PDFVersion_A = () => {
           <Button variant="secondary" size="lg" onClick={handleClose}>
             Close
           </Button>
-
-          <Button
-            disabled={Data.loading}
-            variant="primary"
-            size="lg"
-            onClick={handleSave}
-          >
+         
+          <Button disabled={Data.loading} variant="primary" size="lg" onClick={handleSave}>
             Save
           </Button>
         </Modal.Footer>
@@ -282,5 +287,3 @@ const PDFVersion_A = () => {
 };
 
 export default PDFVersion_A;
-
-
