@@ -12,16 +12,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { GetUserSpeicificStatement, SaveCapabilityStatement } from "../../../store/actions/PDF/pdf.actions";
 import { useLocation, useNavigate } from 'react-router-dom';
+import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 
 const PDFVersion_A = () => {
   const Data = useSelector((state) => state.pdf);
+  const [loading,setLoading]=useState(false)
   const pdf = Data.values
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate()
   const queryString = location?.search; // This will be "?Salman.pdf"
-  // Remove the leading "?" character
   const queryParamValue = queryString.slice(1);
+
   const [intialState, setIntialState] = useState({
     userId: 2,
     version: "A",
@@ -44,7 +46,6 @@ const PDFVersion_A = () => {
   const [borderColor, setBorderColor] = useState("black");
   const [isEditMode, setIsEditMode] = useState(false);
   const [showPopup, setShowPopup] = useState(false); // State to control the pop-up
-
 
 
 
@@ -125,6 +126,45 @@ const PDFVersion_A = () => {
     setShowPopup(false); // Close the pop-up
   };
 
+  const options = {
+    
+    page: {
+       // margin is in MM, default is Margin.NONE = 0
+       margin: Margin.SMALL,
+       // default is 'A4'
+       format: 'letter',
+       // default is 'portrait
+       
+    },
+    canvas: {
+       // default is 'image/jpeg' for better size performance
+       qualityRatio: 1
+    },
+ 
+    overrides: {
+       // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
+       pdf: {
+          compress: true
+       },
+       // see https://html2canvas.hertzen.com/configuration for more options
+       canvas: {
+          useCORS: true
+       }
+    },
+ };
+ 
+ // you can use a function to return the target element besides using React refs
+ const getTargetElement = () => document.getElementById('pdf');
+
+ const generatepdf=()=>{
+  setLoading(true)
+  generatePDF(getTargetElement,options).then((response)=>{
+   console.log(response);
+   setLoading(false)
+  }).catch(()=>{
+
+  })
+ }
   return (
     <>
       <div id="nb" className="edit">
@@ -147,9 +187,9 @@ const PDFVersion_A = () => {
           </Button>
         )}
       </div>
-      <div className="Main_PDF">
-      <div id="pdfContainer" className="PDF " >
-        <div className="PDF_main" style={{ borderColor }}>
+      <div >
+      <div id="pdf" className="PDF" >
+        <div className="PDF_main"  style={{ borderColor }}>
           <Head
             handleOnChange={handleOnChange}
             intialState={intialState}
@@ -187,8 +227,8 @@ const PDFVersion_A = () => {
       <Button variant="primary" size="lg" onClick={handlePopup}>
         Save
       </Button>
-      <Button variant="primary" size="lg" onClick={handlePrint}>
-        Print
+      <Button disabled={loading} variant="primary" size="lg" onClick={generatepdf}>
+        Generate Pdf
       </Button>
       </div>
 
@@ -226,3 +266,5 @@ const PDFVersion_A = () => {
 };
 
 export default PDFVersion_A;
+
+
