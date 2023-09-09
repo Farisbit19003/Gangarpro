@@ -5,9 +5,11 @@ import { AiOutlineEdit, AiFillDelete, AiOutlineLoading } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { DeleteStatement, GetTotalStatement, GetUserSpeicificStatement, ResetState } from "../../store/actions/PDF/pdf.actions";
 import { useSelector } from "react-redux";
+
 import { Button, Modal, FormControl } from "react-bootstrap";
 import PDFVersion_A from "./Versions/PDFVersion_A";
 import PDFVersion_B from "./Versions/PDFVersion_B";
+import { toast } from "react-toastify";
 
 const PDF = () => {
   const { pdfs, loading } = useSelector((state) => state.pdf);
@@ -35,9 +37,14 @@ const PDF = () => {
   const handleEdit = (p) => {
     dispatch(GetUserSpeicificStatement(p, navigate, setVersion))
   }
+  let user =JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
-    dispatch(GetTotalStatement());
-  }, [])
+    if (!user) {
+      toast.error("Please Login")
+    }else{
+      dispatch(GetTotalStatement());
+    }
+  }, [user])
 
   const handleVersion = (v) => {
     setVersion(v);
@@ -61,7 +68,7 @@ const PDF = () => {
           </Link>
         </div>
       ) : (
-        <div className="CCP_List">
+        <div id="#nb" className="CCP_List">
           <h1 className="head">CCP PDFS</h1>
           {pdfs?.map((p) => {
             return (

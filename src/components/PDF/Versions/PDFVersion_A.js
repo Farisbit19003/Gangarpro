@@ -91,6 +91,7 @@ const PDFVersion_A = () => {
     setShowPopup(true); // Show the pop-up
   };
   const handleSave = (e) => {
+    return console.log("int=>" , intialState)
     let formData=new FormData();
     for (const key in intialState) {
       if (intialState[key] !== undefined) {

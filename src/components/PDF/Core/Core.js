@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import "./Core.css";
 import { toast } from "react-toastify";
 
 const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
+  const [pic, setPic]=useState('');
   const handleImageUpload = (e) => {
     const file_current = e.target.files[0];
     if (file_current.size > 1024000) {
-      toast.error("File size cannot exceed more than 1MB" );
+      toast.error("File size cannot exceed more than 1MB");
     } else {
-       handleOnChange({
-      target: { name: "core_competencies_image", value:file_current  },
-    });
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setPic(e.target.result); // Set the pic state with the uploaded image data
+        handleOnChange({
+          target: { name: "core_competencies_image", value: file_current },
+        });
+      };
+      if (file_current) {
+        reader.readAsDataURL(file_current);
+      }
     }
   };
+  
 
   const handleCompetencyChange = (index, value) => {
     const competencyData = intialState.core_competencies.split("=");
@@ -91,16 +100,22 @@ const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
         {page !== "VersionB" && (
           <div className="core_img">
             {isEditMode ? (
+             <>
               <Form.Control
                 type="file"
                 accept="image/*"
                 onChange={handleImageUpload}
               />
+              <img
+                  className="core_img"
+                  src={ pic ? pic : intialState.core_competencies_image }
+                  alt="Uploaded"
+                /></>
             ) : (
               intialState.core_competencies_image && (
                 <img
                   className="core_img"
-                  src={intialState.core_competencies_image}
+                  src={ pic ? pic : intialState.core_competencies_image }
                   alt="Uploaded"
                 />
               )
