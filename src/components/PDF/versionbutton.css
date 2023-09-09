@@ -29,10 +29,17 @@
     justify-content: space-between;
     
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1200px) {
     .in_row {
         flex-direction: column; /* Change to a vertical layout */
         align-items: flex-start; /* Align items to the start of the container */
+    }
+    .CCP_List{
+        width: 100%;
+        align-items: center;
+    }
+    .ttp{
+        border-left: none;
     }
 }
 .ttp{

@@ -12,15 +12,14 @@
   font-size: medium;
   width: 850px;
   padding: 1rem;
-  overflow-x: auto; /* Add horizontal overflow with auto-scrolling */
+  overflow-x: auto; 
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1200px) {
   .PDF_main {
     padding: 1rem;
     width: 100%; /* Make it take the full width of the screen */
   }
-  
 }
 
 

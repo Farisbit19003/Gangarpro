@@ -66,7 +66,7 @@ const PDF = () => {
     <>
       {ok && version === "" ? (
        <>
-        <h1 className="text-center mt-5">CHOOSE YOUR VERSION</h1>
+        <h1 id="nb" className="text-center mt-5">CHOOSE YOUR VERSION</h1>
         <div id="nb" className="version">
           
           <Link className="link" onClick={() => handleVersion("A")}>

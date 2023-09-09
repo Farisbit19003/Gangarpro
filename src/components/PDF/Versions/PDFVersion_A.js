@@ -147,7 +147,8 @@ const PDFVersion_A = () => {
           </Button>
         )}
       </div>
-      <div id="pdfContainer" className="PDF" >
+      <div className="Main_PDF">
+      <div id="pdfContainer" className="PDF " >
         <div className="PDF_main" style={{ borderColor }}>
           <Head
             handleOnChange={handleOnChange}
@@ -181,7 +182,7 @@ const PDFVersion_A = () => {
           />
         </div>
       </div>
-
+      </div>
       <div className="s-p" id="nb">
       <Button variant="primary" size="lg" onClick={handlePopup}>
         Save
