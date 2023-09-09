@@ -94,14 +94,14 @@ const AuthRoutes = () => {
             }
           />
           {/* PDF */}
-          {/* <Route path="/pdf" element={<PDF/>} />
+          <Route path="/pdf" element={<PDF/>} />
           <Route path="/pdf/Version-A" element={<PDFVersion_A />} />
-          <Route path="/pdf/Version-B" element={<PDFVersion_B />} /> */}
-          <Route path="/pdf" element={
+          <Route path="/pdf/Version-B" element={<PDFVersion_B />} />
+          {/* <Route path="/pdf" element={
             <ProtectedRoute>
               <PDF />
             </ProtectedRoute>
-          } />
+          } /> */}
 
         </Routes>
       </div>
