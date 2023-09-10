@@ -49,7 +49,7 @@ const PDFVersion_B = () => {
   }, []);
   const [intialState, setIntialState] = useState({
     userId: 2,
-    version: "A",
+    version: "B",
     pdf_name: pdf?.pdf_name,
     company_info: pdf.company_info,
     company_address1: pdf.company_address1,
@@ -73,7 +73,7 @@ const PDFVersion_B = () => {
   useEffect(() => {
     setIntialState({
       userId: 2,
-      version: "A",
+      version: "B",
       pdf_name: pdf?.pdf_name,
       company_info: pdf.company_info,
       company_address1: pdf.company_address1,
@@ -131,7 +131,7 @@ const PDFVersion_B = () => {
   const handlePrint = (e) => {
     e.preventDefault();
     //Show only the content within the PDF div
-    const pdfContainer = document.getElementById("pdfContainer");
+    const pdfContainer = document.getElementById("B_cont");
     const originalDisplayStyle = pdfContainer.style.display;
     pdfContainer.style.display = "flex";
 
@@ -203,8 +203,8 @@ const PDFVersion_B = () => {
           </Button>
         )}
       </div>
-      <div>
-        <div id="pdfContainer" className="PDF">
+      <div >
+        <div id="B_cont" className="PDF">
           <div className="PDF_main" style={{ borderColor }}>
             <Head
               handleOnChange={handleOnChange}

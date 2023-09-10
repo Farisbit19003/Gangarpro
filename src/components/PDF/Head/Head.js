@@ -21,7 +21,7 @@ const Head = ({ isEditMode, intialState, handleOnChange, Logo_Url, page }) => {
                 <img
                 id="gana_logo"
                   className="logo"
-                  src={Logo_Url ? Logo_Url : "../gana_logo.jpg"}
+                  src={Logo_Url ? Logo_Url : "../gana_logo.png"}
                   alt="default-logo"
                 />
               </>

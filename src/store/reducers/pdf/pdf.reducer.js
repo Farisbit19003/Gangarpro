@@ -30,10 +30,9 @@ let obj = {
     "Interior post construction cleanup=Pressure washing=Window washing=Covid disinfection and sanitation",
   core_competencies_info:
     "Scope – Final clean = NAICS – 561720 = DUNS – 067345638",
-  core_competencies_image:"../a.jpeg",
   past_performance:
     "Canaan Crossing=Woda Cooper Companies=Allora At the Exchange=CORE Construction=Intrada Westside=JM Wilkerson=Harris County Carver Middle School=Freeman & Associates",
-  past_performance_image: "../a.jpeg",
+  past_performance_image: "https://res.cloudinary.com/dc367rgig/image/upload/v1694361444/a_opjscb.jpg",
   difference:
     "We have been awarded contracts in over 41 cities. We have 9 managers and offices located around the USA that can supervise our local labor and equipment. CCP can make a site visit to confirm scope and pricing within 48 hours notice anywhere in the USA. We will always mobilize (team lives) within 1 hour from the job site.",
 };
@@ -53,12 +52,12 @@ let objB = {
     "Ganarpro operates as a Software-as-a-Service (SaaS) firm, offering a diversity solution tailored for commercial construction firms in the USA. By joining GC Planify, general contractors can expand their network of certified diverse suppliers and enhance their talent pool for full-time employment.",
   core_competencies:
     "Show ongoing commitment to diversity, equity, and inclusion (dei).=Increase vendor/ subcontractor inflow=Talent/ recruitment=GC Planify card",
-  core_competencies_image: "../b1.jpeg",
+  core_competencies_image: "https://res.cloudinary.com/dc367rgig/image/upload/v1694361216/b._ganarpro_2_ocl5e6.jpg",
   core_competencies_info:
     "Scope – Final clean = NAICS – 561720 = DUNS – 067345638",
   past_performance:
     "Chicago Tribune=Illinois Department of Transportation=Chicago Housing Authority=Housing Authority of the County of Cook=Chicago Business Journal=Associated General Contractors of Illinois=The Chicago Minority Supplier Development Council=	Mid-States Minority Supplier Development Council",
-  past_performance_image: "../b2.jpeg",
+  past_performance_image: "https://res.cloudinary.com/dc367rgig/image/upload/v1694361444/b_aymucf.jpg",
   difference:
 "We distinguish ourselves from Building Connected, PlanHub, and Procore. Instead, we're developing APIs to integrate GC Planify with their platforms. Our primary focus is to present DEI initiative insights and assist your company in ESG matters. Join our community of construction firms that are demonstrably committed to their DEI strategies."};
 const initialState = {

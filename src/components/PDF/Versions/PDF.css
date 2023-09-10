@@ -72,6 +72,11 @@
   }
   #pdfContainer, #pdfContainer * {
     visibility: visible;
+    font-size: medium;
+  }
+  #B_cont, #B_cont *{
+    visibility: visible;
+    font-size: small;
   }
 }
 

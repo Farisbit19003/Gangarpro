@@ -46,7 +46,7 @@ const PDFVersion_A = () => {
   }, []);
   const [intialState, setIntialState] = useState({
     userId: 2,
-    version:"B",
+    version:"A",
     pdf_name: pdf?.pdf_name,
     company_info: pdf.company_info,
     company_address1: pdf.company_address1,
@@ -81,7 +81,7 @@ const PDFVersion_A = () => {
     setIntialState(
     {
     userId: 2,
-    version: "B",
+    version: "A",
     pdf_name: pdf?.pdf_name,
     company_info: pdf.company_info,
     company_address1: pdf.company_address1,
@@ -92,7 +92,6 @@ const PDFVersion_A = () => {
     url: pdf.url,
     about_us: pdf.about_us,
     core_competencies: pdf.core_competencies,
-    core_competencies_image: pdf.core_competencies_image,
     core_competencies_info: pdf.core_competencies_info,
     past_performance: pdf.past_performance,
     past_performance_image: pdf.past_performance_image,
@@ -120,6 +119,7 @@ const PDFVersion_A = () => {
     setShowPopup(true); // Show the pop-up
   };
   const handleSave = (e) => {
+    
     let formData=new FormData();
     for (const key in intialState) {
       if (intialState[key] !== undefined) {

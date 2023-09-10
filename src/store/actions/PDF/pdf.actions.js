@@ -117,8 +117,8 @@ export const SaveCapabilityStatement= (formData,setIsEditMode,setShowPopup) => a
     if (message === 'Not authorized, token failed') {
       // Handle logout or other actions as needed
     }
-    toast.error(message+"PDF Saving failed")
-    dispatch(SavingPDFStart("PDF Saving Failed"));
+    toast.error("PDF Saving failed")
+    dispatch(SavingPDFFailed("PDF Saving Failed"));
   }
 };
 
