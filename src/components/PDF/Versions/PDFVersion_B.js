@@ -236,6 +236,22 @@ const PDFVersion_B = () => {
             intialState={intialState}
             isEditMode={isEditMode}
           />
+            <>
+            <div>
+              <ul className="c_list">
+                <li>
+                Annual subscription for GC Planify: $490.
+                </li>
+                <li>
+                Zero enrollment fee.
+                </li>
+                <li>
+                Recruitment fee: 20% of the new hire's salary.
+                </li>
+              </ul>
+            </div>
+            </>
+
         </div>
       </div>
       </div>

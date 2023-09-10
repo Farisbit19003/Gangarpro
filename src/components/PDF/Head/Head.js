@@ -2,14 +2,32 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import "./Head.css";
 
-const Head = ({ isEditMode, intialState, handleOnChange,Logo_Url}) => {
+const Head = ({ isEditMode, intialState, handleOnChange, Logo_Url, page }) => {
   return (
     <>
       <div className="head">
         <div className="main">
           <div className="logo">
-            <img className="logo" src={Logo_Url?Logo_Url:"../ccp-logo.png"} alt="default-logo" />
+            {page === "VersionA" ? (
+              <>
+                <img
+                  className="logo"
+                  src={Logo_Url ? Logo_Url : "../ccp-logo.png"}
+                  alt="default-logo"
+                />
+              </>
+            ) : (
+              <>
+                <img
+                id="gana_logo"
+                  className="logo"
+                  src={Logo_Url ? Logo_Url : "../gana_logo.jpg"}
+                  alt="default-logo"
+                />
+              </>
+            )}
           </div>
+
           <div className="heading">
             <h2 className="head_h">CAPABILTIES STATEMENT</h2>
           </div>

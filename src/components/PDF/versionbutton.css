@@ -18,8 +18,42 @@
     }
     
 }
-
-
+.c_main{
+    padding: 1rem;
+    margin: 1rem;
+}
+.c_h1{
+    font-size: xx-large;
+}
+.c_title{
+    font-size: x-large;
+}
+.c_head{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    gap: 5rem;
+}
+.c_info{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+.c_para{
+    text-align: center;
+    width: 55%;
+    font-size: medium;
+    align-items: center;
+    font-size: larger;
+    }
+.c_pic{
+    mix-blend-mode:multiply !important;
+    height: auto;
+    width: 200px;
+}
 
 .CCP_List{
     display: flex;

@@ -218,6 +218,7 @@ const PDFVersion_A = () => {
             intialState={intialState}
             isEditMode={isEditMode}
             Logo_Url={Data?.logo_url}
+            page="VersionA"
           />
           <br/>
           <About

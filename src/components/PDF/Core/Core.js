@@ -4,7 +4,7 @@ import "./Core.css";
 import { toast } from "react-toastify";
 
 const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
-  const [pic, setPic]=useState('');
+  const [pic, setPic] = useState("");
   const handleImageUpload = (e) => {
     const file_current = e.target.files[0];
     if (file_current.size > 1024000) {
@@ -22,7 +22,6 @@ const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
       }
     }
   };
-  
 
   const handleCompetencyChange = (index, value) => {
     const competencyData = intialState.core_competencies.split("=");
@@ -38,7 +37,10 @@ const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
     competencyInfoData[index] = value;
     const updatedCompetenciesInfo = competencyInfoData.join("=");
     handleOnChange({
-      target: { name: "core_competencies_info", value: updatedCompetenciesInfo },
+      target: {
+        name: "core_competencies_info",
+        value: updatedCompetenciesInfo,
+      },
     });
   };
 
@@ -46,7 +48,11 @@ const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
     <>
       <div className="core">
         <div>
-          <h1 className="core_h">Core Competencies</h1>
+          {page === "VersionA" ? (
+            <h1 className="core_h">Core Competencies</h1>
+          ) : (
+            <h1 className="core_h">Software Benefits</h1>
+          )}
           {isEditMode ? (
             <div>
               {intialState.core_competencies?.split("=").map((item, index) => (
@@ -56,7 +62,9 @@ const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
                     placeholder="Enter Core Competency"
                     name={`core_competencies[${index}]`}
                     value={item}
-                    onChange={(e) => handleCompetencyChange(index, e.target.value)}
+                    onChange={(e) =>
+                      handleCompetencyChange(index, e.target.value)
+                    }
                   />
                 </div>
               ))}
@@ -69,53 +77,61 @@ const Core = ({ isEditMode, intialState, handleOnChange, page }) => {
             </ul>
           )}
         </div>
-
-        <div>
-          {isEditMode ? (
-            <div className="edit-core">
-              <div className="edit_core_info">
-                <Form.Label>Core Competencies Info</Form.Label>
-                {intialState.core_competencies_info?.split("=").map((item, index) => (
-                  <div key={index}>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Core Competency Info"
-                      name={`core_competencies_info[${index}]`}
-                      value={item}
-                      onChange={(e) => handleCompetencyInfoChange(index, e.target.value)}
-                    />
-                  </div>
-                ))}
+        {page === "VersionA" && (
+          <div>
+            {isEditMode ? (
+              <div className="edit-core">
+                <div className="edit_core_info">
+                  <Form.Label>Core Competencies Info</Form.Label>
+                  {intialState.core_competencies_info
+                    ?.split("=")
+                    .map((item, index) => (
+                      <div key={index}>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter Core Competency Info"
+                          name={`core_competencies_info[${index}]`}
+                          value={item}
+                          onChange={(e) =>
+                            handleCompetencyInfoChange(index, e.target.value)
+                          }
+                        />
+                      </div>
+                    ))}
+                </div>
               </div>
-            </div>
-          ) : (
-            <div>
-              {intialState.core_competencies_info?.split("=").map((item, index) => (
-                <p key={index}>{item}</p>
-              ))}
-            </div>
-          )}
-        </div>
+            ) : (
+              <div>
+                {intialState.core_competencies_info
+                  ?.split("=")
+                  .map((item, index) => (
+                    <p key={index}>{item}</p>
+                  ))}
+              </div>
+            )}
+          </div>
+        )}
 
         {page !== "VersionA" && (
           <div className="core_img">
             {isEditMode ? (
-             <>
-              <Form.Control
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-              />
-              <img
+              <>
+                <Form.Control
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+                <img
                   className="core_img"
-                  src={ pic ? pic : intialState.core_competencies_image }
+                  src={pic ? pic : intialState.core_competencies_image}
                   alt="Uploaded"
-                /></>
+                />
+              </>
             ) : (
               intialState.core_competencies_image && (
                 <img
                   className="core_img"
-                  src={ pic ? pic : intialState.core_competencies_image }
+                  src={pic ? pic : intialState.core_competencies_image}
                   alt="Uploaded"
                 />
               )

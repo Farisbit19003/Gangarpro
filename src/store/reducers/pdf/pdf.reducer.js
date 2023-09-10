@@ -10,73 +10,68 @@ import {
   RESET_STATE,
   DELETESTATEMENT_START,
   DELETESTATEMENT_FAILED,
-  GetSpecificStatement_START
+  GetSpecificStatement_START,
 } from "../../actionTypes/index";
-let obj={
+let obj = {
   id: "",
   pdf_name: "",
   logo_url: "",
   version: "",
   company_info: "Construction Clean Partners LLC",
-  company_address1: "715 Peachtree St, Ste 100",
+  company_address1: "715 Peachtree St, Stuite 100.",
   company_address2: "Atlanta, GA 30308",
-  owner_name: "Aduvie Okoh",
-  owner_email: "aduvie@final‐clean.com",
-  owner_phone: "(202) 544-1353",
+  owner_name: "Betsy Moates",
+  owner_email: "betsy@final‐clean.com",
+  owner_phone: "(404) 734-7571",
   url: "https://final‐clean.com/",
   about_us:
     "Construction Clean Partners works with commercial general contractors as a subcontractor completing the post construction final clean scope. We estimate cleaning bids via the plans and physical site visit walk throughs. CCP mobilizes employee labor and equipment to new construction and renovation commercial projects to help clean interior building sites.",
   core_competencies:
     "Interior post construction cleanup=Pressure washing=Window washing=Covid disinfection and sanitation",
-  core_competencies_image:
-    "https://res.cloudinary.com/die5mkbau/image/upload/v1694085238/ccp-logo_wryb63.png",
   core_competencies_info:
     "Scope – Final clean = NAICS – 561720 = DUNS – 067345638",
+  core_competencies_image:"../a.jpeg",
   past_performance:
     "Canaan Crossing=Woda Cooper Companies=Allora At the Exchange=CORE Construction=Intrada Westside=JM Wilkerson=Harris County Carver Middle School=Freeman & Associates",
-  past_performance_image:
-    "https://res.cloudinary.com/die5mkbau/image/upload/v1694085238/ccp-logo_wryb63.png",
+  past_performance_image: "../a.jpeg",
   difference:
-    "We have been awarded contracts in over 41 cities. We have 9 managers and offices located around the USA that can supervise our local labor and equipment. CCP can get a site visit to confirm scope and pricing within 48 hours notice anywhere in the USA. We will always mobilize within an hour of your job site.",
-}
-let objB={
+    "We have been awarded contracts in over 41 cities. We have 9 managers and offices located around the USA that can supervise our local labor and equipment. CCP can make a site visit to confirm scope and pricing within 48 hours notice anywhere in the USA. We will always mobilize (team lives) within 1 hour from the job site.",
+};
+let objB = {
   id: "",
   pdf_name: "",
   logo_url: "",
   version: "",
-  company_info: "Faris",
-  company_address1: "715 Peachtree St, Ste 100",
-  company_address2: "Atlanta, GA 30308",
-  owner_name: "Aduvie Okoh",
-  owner_email: "aduvie@final‐clean.com",
-  owner_phone: "(202) 544-1353",
+  company_info: "Ganarpro ",
+  company_address1: "200 South Wacker Drive",
+  company_address2: "Chicago, IL 60606",
+  owner_name: "Brandon Inniss",
+  owner_email: "brandon@ganarpro.com",
+  owner_phone: "(945) 218-5522",
   url: "https://final‐clean.com/",
   about_us:
-    "Construction Clean Partners works with commercial general contractors as a subcontractor completing the post construction final clean scope. We estimate cleaning bids via the plans and physical site visit walk throughs. CCP mobilizes employee labor and equipment to new construction and renovation commercial projects to help clean interior building sites.",
+    "Ganarpro operates as a Software-as-a-Service (SaaS) firm, offering a diversity solution tailored for commercial construction firms in the USA. By joining GC Planify, general contractors can expand their network of certified diverse suppliers and enhance their talent pool for full-time employment.",
   core_competencies:
-    "Interior post construction cleanup=Pressure washing=Window washing=Covid disinfection and sanitation",
-  core_competencies_image:
-    "https://res.cloudinary.com/die5mkbau/image/upload/v1694085238/ccp-logo_wryb63.png",
+    "Show ongoing commitment to diversity, equity, and inclusion (dei).=Increase vendor/ subcontractor inflow=Talent/ recruitment=GC Planify card",
+  core_competencies_image: "../b1.jpeg",
   core_competencies_info:
     "Scope – Final clean = NAICS – 561720 = DUNS – 067345638",
   past_performance:
-    "Canaan Crossing=Woda Cooper Companies=Allora At the Exchange=CORE Construction=Intrada Westside=JM Wilkerson=Harris County Carver Middle School=Freeman & Associates",
-  past_performance_image:
-    "https://res.cloudinary.com/die5mkbau/image/upload/v1694085238/ccp-logo_wryb63.png",
+    "Chicago Tribune=Illinois Department of Transportation=Chicago Housing Authority=Housing Authority of the County of Cook=Chicago Business Journal=Associated General Contractors of Illinois=The Chicago Minority Supplier Development Council=	Mid-States Minority Supplier Development Council",
+  past_performance_image: "../b2.jpeg",
   difference:
-    "We have been awarded contracts in over 41 cities. We have 9 managers and offices located around the USA that can supervise our local labor and equipment. CCP can get a site visit to confirm scope and pricing within 48 hours notice anywhere in the USA. We will always mobilize within an hour of your job site.",
-}
+"We distinguish ourselves from Building Connected, PlanHub, and Procore. Instead, we're developing APIs to integrate GC Planify with their platforms. Our primary focus is to present DEI initiative insights and assist your company in ESG matters. Join our community of construction firms that are demonstrably committed to their DEI strategies."};
 const initialState = {
   error: null,
   loading: false,
   pdfs: [],
-  values:""
+  values: "",
 };
 
-const ResetState = (state,action) => {
+const ResetState = (state, action) => {
   return updateObject(state, {
-    values:action.v==="A"?obj:action.v==="B"?objB:"",
-    loading:false
+    values: action.v === "A" ? obj : action.v === "B" ? objB : "",
+    loading: false,
   });
 };
 const DeletePDFStart = (state) => {
@@ -85,7 +80,7 @@ const DeletePDFStart = (state) => {
     error: null,
   });
 };
-const DeletePDFFailed = (state,action) => {
+const DeletePDFFailed = (state, action) => {
   return updateObject(state, {
     loading: false,
     error: action.Error,
@@ -111,7 +106,7 @@ const PDFSavingFail = (state, action) => {
   });
 };
 const GetTotalStatementSuccess = (state, action) => {
-  return updateObject(state,action.data);
+  return updateObject(state, action.data);
 };
 const GetTotalStatementFail = (state, action) => {
   return updateObject(state, {
@@ -119,12 +114,12 @@ const GetTotalStatementFail = (state, action) => {
     loading: false,
   });
 };
-const GetSpecificStatementStart= (state, action) => {
+const GetSpecificStatementStart = (state, action) => {
   return updateObject(state, {
     error: null,
     loading: true,
   });
-}
+};
 
 const GetSpecificStatementFail = (state, action) => {
   return updateObject(state, {
@@ -135,8 +130,8 @@ const GetSpecificStatementFail = (state, action) => {
 
 const GetSpecificStatementSuccess = (state, action) => {
   return updateObject(state, {
-    values:action.data,
-    loading:false
+    values: action.data,
+    loading: false,
   });
 };
 
@@ -152,18 +147,18 @@ export const pdfReducer = (state = initialState, action) => {
       return GetTotalStatementSuccess(state, action);
     case GetTotalStatement_FAILED:
       return GetTotalStatementFail(state, action);
-      case GetSpecificStatement_START:
+    case GetSpecificStatement_START:
       return GetSpecificStatementStart(state, action);
     case GetSpecificStatement_SUCCESS:
       return GetSpecificStatementSuccess(state, action);
     case GetSpecificStatement_FAILED:
       return GetSpecificStatementFail(state, action);
-      case RESET_STATE:
-      return ResetState(state,action);
-      case DELETESTATEMENT_START:
+    case RESET_STATE:
+      return ResetState(state, action);
+    case DELETESTATEMENT_START:
       return DeletePDFStart(state);
-      case DELETESTATEMENT_FAILED:
-      return DeletePDFFailed(state,action);
+    case DELETESTATEMENT_FAILED:
+      return DeletePDFFailed(state, action);
     default:
       return state;
   }
