@@ -151,24 +151,25 @@ const PDF = () => {
                   {" "}
                   <div className="c_main" id="nb">
                     <div className="c_head">
-                      <img className="c_pic" src="https://res.cloudinary.com/dc367rgig/image/upload/v1694329491/c_statement_wwzghy.jpg" alt="" />
+                      <img className="c_pic" src="Logo.png" alt="" />
                       <h1 className="c_h1">Capability Statement</h1>
                     </div>
-                   <div className="c_info">
-                   <h2 className="c_title">
-                      Empower Your Enterprise: Showcase Your Experience with
-                      Precision and Clarity
-                    </h2>
-                    <p className="c_para">
-                      Boast your corprate image using the Ganarpro Capability
-                      Statement. Tailored to engage the businesses of all sizes,
-                      this instrument provides a one-page view that encapsulates
-                      your firm's foundational strength. With the availabilty of
-                      two modifiable templates, creates a statement that aligns
-                      seamlessly with your brand's voice. Present all pivotal
-                      company information on one concise page.
-                    </p>
-                   </div>
+                    <div className="c_info">
+                      <h2 className="c_title">
+                        Empower Your Enterprise: Showcase Your Experience with
+                        Precision and Clarity
+                      </h2>
+                      <p className="c_para">
+                        Boast your corprate image using the Ganarpro Capability
+                        Statement. Tailored to engage the businesses of all
+                        sizes, this instrument provides a one-page view that
+                        encapsulates your firm's foundational strength. With the
+                        availabilty of two modifiable templates, creates a
+                        statement that aligns seamlessly with your brand's
+                        voice. Present all pivotal company information on one
+                        concise page.
+                      </p>
+                    </div>
                   </div>
                 </>
               )}

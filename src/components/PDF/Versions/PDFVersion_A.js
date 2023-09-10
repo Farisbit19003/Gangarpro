@@ -139,44 +139,44 @@ const PDFVersion_A = () => {
    
   };
 
-  const options = {
+//   const options = {
     
-    page: {
-       // margin is in MM, default is Margin.NONE = 0
-       margin:Margin.SMALL,
-       // default is 'A4'
-       // default is 'portrait
+//     page: {
+//        // margin is in MM, default is Margin.NONE = 0
+//        margin:Margin.SMALL,
+//        // default is 'A4'
+//        // default is 'portrait
        
-    },
-    canvas: {
-       // default is 'image/jpeg' for better size performance
-       qualityRatio: 1
-    },
+//     },
+//     canvas: {
+//        // default is 'image/jpeg' for better size performance
+//        qualityRatio: 1
+//     },
  
-    overrides: {
-       // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
-       pdf: {
-          compress: true,
-       },
-       // see https://html2canvas.hertzen.com/configuration for more options
-       canvas: {
-          useCORS: true
-       }
-    },
- };
+//     overrides: {
+//        // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
+//        pdf: {
+//           compress: true,
+//        },
+//        // see https://html2canvas.hertzen.com/configuration for more options
+//        canvas: {
+//           useCORS: true
+//        }
+//     },
+//  };
  
  // you can use a function to return the target element besides using React refs
- const getTargetElement = () => document.getElementById('pdf');
+//  const getTargetElement = () => document.getElementById('pdf');
 
- const generatepdf=()=>{
-  setLoading(true)
-  generatePDF(pdfWrapper,options).then((response)=>{
-   console.log(response);
-   setLoading(false)
-  }).catch(()=>{
+//  const generatepdf=()=>{
+//   setLoading(true)
+//   generatePDF(pdfWrapper,options).then((response)=>{
+//    console.log(response);
+//    setLoading(false)
+//   }).catch(()=>{
 
-  })
- }
+//   })
+//  }
   const handlePrint = (e) => {
     e.preventDefault();
  //Show only the content within the PDF div
@@ -211,8 +211,8 @@ const PDFVersion_A = () => {
           Cancel
         </Button>}
       </div>
-      <div id="pdfContainer" ref={pdfWrapper} className="PDF" >
-        <div id="pdf"  className="PDF_main" style={{width:InitialWidth, borderColor }}>
+      <div id="pdfContainer" className="PDF" >
+        <div id="pdf"  className="PDF_main" style={{ borderColor }}>
           <Head
             handleOnChange={handleOnChange}
             intialState={intialState}
@@ -254,8 +254,8 @@ const PDFVersion_A = () => {
       <Button variant="primary" size="lg" onClick={handlePopup}>
         Save
       </Button>
-      <Button disabled={loading} variant="primary" size="lg" onClick={generatepdf}>
-        Generate Pdf
+      <Button  variant="primary" size="lg" onClick={handlePrint}>
+      Print
       </Button>
       </div>
 
